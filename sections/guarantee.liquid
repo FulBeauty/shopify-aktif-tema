@@ -1,0 +1,1776 @@
+<!-- sections/guarantee.liquid -->
+<section id="guarantee" class="guarantee-section" style="background-color: {{ section.settings.background_color | default: 'var(--trust-green)' }};">
+    <div class="guarantee-content">
+        {% if section.settings.title != blank %}
+        <h2>{{ section.settings.title }}</h2>
+        {% endif %}
+        
+        {% if section.settings.description != blank %}
+        <p class="guarantee-description">{{ section.settings.description }}</p>
+        {% endif %}
+        
+        {% comment %} Guarantee badge/seal {% endcomment %}
+        {% if section.settings.show_guarantee_seal %}
+        <div class="guarantee-seal">
+            {% if section.settings.seal_image != blank %}
+                <img src="{{ section.settings.seal_image | img_url: '120x120' }}" 
+                     alt="{{ section.settings.seal_alt | default: 'Garanti Mührü' }}" 
+                     loading="lazy">
+            {% else %}
+                <div class="seal-placeholder">
+                    <div class="seal-icon">{{ section.settings.seal_icon | default: '🛡️' }}</div>
+                    <div class="seal-text">
+                        <div class="seal-number">{{ section.settings.guarantee_days | default: '30' }}</div>
+                        <div class="seal-label">{{ section.settings.seal_label | default: 'GÜN GARANTİ' }}</div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        {% if section.blocks.size > 0 %}
+        <div class="guarantee-features">
+            {% for block in section.blocks %}
+                {% case block.type %}
+                    {% when 'guarantee_feature' %}
+                        <div class="guarantee-feature" {{ block.shopify_attributes }}>
+                            {% if block.settings.icon != blank %}
+                            <div class="icon">{{ block.settings.icon }}</div>
+                            {% endif %}
+                            
+                            {% if block.settings.title != blank %}
+                            <h3>{{ block.settings.title }}</h3>
+                            {% endif %}
+                            
+                            {% if block.settings.description != blank %}
+                            <p>{{ block.settings.description }}</p>
+                            {% endif %}
+                            
+                            {% comment %} Feature details {% endcomment %}
+                            {% if block.settings.show_details %}
+                            <div class="feature-details">
+                                {% if block.settings.detail_1 != blank %}
+                                <div class="detail-item">
+                                    <span class="detail-icon">{{ block.settings.detail_1_icon | default: '✓' }}</span>
+                                    <span class="detail-text">{{ block.settings.detail_1 }}</span>
+                                </div>
+                                {% endif %}
+                                
+                                {% if block.settings.detail_2 != blank %}
+                                <div class="detail-item">
+                                    <span class="detail-icon">{{ block.settings.detail_2_icon | default: '✓' }}</span>
+                                    <span class="detail-text">{{ block.settings.detail_2 }}</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                    {% when 'guarantee_step' %}
+                        <div class="guarantee-step" {{ block.shopify_attributes }}>
+                            {% if block.settings.step_number != blank %}
+                            <div class="step-number">{{ block.settings.step_number }}</div>
+                            {% endif %}
+                            
+                            <div class="step-content">
+                                {% if block.settings.step_title != blank %}
+                                <h4>{{ block.settings.step_title }}</h4>
+                                {% endif %}
+                                
+                                {% if block.settings.step_description != blank %}
+                                <p>{{ block.settings.step_description }}</p>
+                                {% endif %}
+                                
+                                {% if block.settings.step_link_text != blank and block.settings.step_link_url != blank %}
+                                <a href="{{ block.settings.step_link_url }}" class="step-link">
+                                    {{ block.settings.step_link_text }} →
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                    {% when 'testimonial_quote' %}
+                        <div class="guarantee-testimonial" {{ block.shopify_attributes }}>
+                            <div class="testimonial-quote-icon">"</div>
+                            {% if block.settings.quote_text != blank %}
+                            <blockquote>{{ block.settings.quote_text }}</blockquote>
+                            {% endif %}
+                            
+                            {% if block.settings.author_name != blank %}
+                            <cite>- {{ block.settings.author_name }}</cite>
+                            {% endif %}
+                            
+                            {% if block.settings.author_photo != blank %}
+                            <div class="author-photo">
+                                <img src="{{ block.settings.author_photo | img_url: '50x50' }}" 
+                                     alt="{{ block.settings.author_name }}" 
+                                     loading="lazy">
+                            </div>
+                            {% endif %}
+                        </div>
+                {% endcase %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% comment %} Money back guarantee details {% endcomment %}
+        {% if section.settings.show_money_back_details %}
+        <div class="money-back-details">
+            <h3>{{ section.settings.money_back_title | default: 'Para İade Koşulları' }}</h3>
+            <div class="money-back-grid">
+                <div class="money-back-item">
+                    <div class="money-back-icon">📦</div>
+                    <div class="money-back-content">
+                        <h4>{{ section.settings.return_condition_1_title | default: 'Kolay İade' }}</h4>
+                        <p>{{ section.settings.return_condition_1_text | default: 'Ürünü orijinal ambalajında iade edin' }}</p>
+                    </div>
+                </div>
+                
+                <div class="money-back-item">
+                    <div class="money-back-icon">🔬</div>
+                    <div class="money-back-content">
+                        <h4>{{ section.settings.return_condition_2_title | default: 'Hipoalerjenik testli' }}</h4>
+                        <p>{{ section.settings.return_condition_2_text | default: 'Kimyasal içermez' }}</p>
+                    </div>
+                </div>
+                
+                <div class="money-back-item">
+                    <div class="money-back-icon">🦠</div>
+                    <div class="money-back-content">
+                        <h4>{{ section.settings.return_condition_3_title | default: 'Ücretsiz İade' }}</h4>
+                        <p>{{ section.settings.return_condition_3_text | default: 'İade kargo masrafı tarafımızdan karşılanır' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% comment %} NEW FAQ Section - Enhanced version {% endcomment %}
+        {% if section.settings.show_faq %}
+        <div class="guarantee-faq">
+            <h3>{{ section.settings.faq_title | default: 'Sık Sorulan Sorular' }}</h3>
+            
+            <!-- FAQ Categories -->
+            <div class="faq-categories">
+                <div class="category-tag active" onclick="filterFAQ('all')">📋 Tümü</div>
+                <div class="category-tag" onclick="filterFAQ('product')">🧴 Ürün Hakkında</div>
+                <div class="category-tag" onclick="filterFAQ('usage')">💡 Kullanım</div>
+                <div class="category-tag" onclick="filterFAQ('safety')">🛡️ Güvenlik</div>
+                <div class="category-tag" onclick="filterFAQ('shipping')">🚚 Kargo & İade</div>
+            </div>
+            
+            <div class="faq-container">
+                <!-- ÜRÜN HAKKINDA -->
+                <div class="faq-item" data-category="product">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>🏥 Dermatoloji uzmanı onaylı olması ne anlama geliyor?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Ful Beauty silikon fırçası, <span class="highlight">Dermatoloji Uzmanı Dr. Ayşe Kaya</span> tarafından 6 aylık klinik testlerden geçirilmiş ve güvenliği onaylanmıştır.</p>
+                            
+                            </div>
+                            
+                            <p><span class="highlight"> Bu onay şunları garanti eder:</p>
+                            <ul style="list-style-type: none; padding-left: 0; margin: 10px 0;">
+                                <li style="margin-bottom: 8px; padding: 5px 0;">🔹 Hipoalerjenik - hassas cilt için güvenli</li>
+                                <li style="margin-bottom: 8px; padding: 5px 0;">🔹 CE medikal cihaz sertifikası</li>
+                                <li style="margin-bottom: 8px; padding: 5px 0;">🔹 Klinik testlerle kanıtlanmış etkinlik</li>
+                                <li style="margin-bottom: 8px; padding: 5px 0;">🔹 Dermatoloji uzmanı takibi</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="product">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>🆚 Diğer silikon fırçalardan farkı nedir?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>Piyasadaki %90 silikon fırça hiçbir dermatoloji testinden geçmemiş.</strong> Bizim farkımız:</p>
+                            
+                            <p><span class="highlight">✓ Çift yoğunluk silikon teknoloji:</span> Hassas ve derin temizlik bir arada</p>
+                            <p><span class="highlight">✓ 30 gün sonuç garantisi.</p>
+                            
+                            <div class="warning-box">
+                                <strong>⚠️ Dikkat:</strong> Piyasadaki ucuz fırçalar CE sertifikası olmayan, test edilmemiş silikondan üretiliyor. Cilt tahrişi ve alerjik reaksiyonlara neden olabilir.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KULLANIM -->
+                <div class="faq-item" data-category="usage">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>📖 Nasıl kullanılır? Zorlu bir işlem mi?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>Çok basit! 3 adımda günlük 2 dakika:</strong></p>
+                            
+                            <p><span class="highlight">1. HAZIRLIK (30 saniye):</span></p>
+                            <p>• Yüzünüzü ılık suyla ıslatın</p>
+                            <p>• Temizleme jelinizi fırçaya uygulayın</p>
+                            
+                            <p><span class="highlight">2. TEMİZLİK (90 saniye):</span></p>
+                            <p>• Yumuşak tarafla nazik dairesel hareketler</p>
+                            <p>• Sert tarafla problemli bölgelere derin temizlik</p>
+                            
+                            <p><span class="highlight">3. DURULAMA (30 saniye):</span></p>
+                            <p>• Bol suyla durulayın</p>
+                            <p>• Fırçayı temizleyip kurutun</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="usage">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>⏰ Ne kadar sürede sonuç görürüm?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>Klinik testlerimizde gözlemlenen sonuçlar:</strong></p>
+                            
+                            <p><span class="highlight">🚀 İlk 3 gün:</span> Cilt yumuşaklığında artış</p>
+                            <p><span class="highlight">📅 1. hafta:</span> Gözenek görünümünde iyileşme</p>
+                            <p><span class="highlight">📅 2. hafta:</span> Cilt parlaklığında artış</p>
+                            <p><span class="highlight">📅 3. hafta:</span> Siyah nokta azalması</p>
+                            <p><span class="highlight">📅 4. hafta:</span> Genel cilt dokusunda belirgin iyileşme</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GÜVENLİK -->
+                <div class="faq-item" data-category="safety">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>😰 Hassas cildim var, tahriş yapar mı?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><span class="highlight">HAYIR! Tam tersine hassas cilt için özel tasarlandı.</span></p>
+                            
+                            <p><strong>Hassas cilt için güvenlik özellikleri:</strong></p>
+                            <ul>
+                                <li>🔬 Hipoalerjenik testli</li>
+                                <li>🧪 Dermatolog onaylı</li>
+                                <li>🌿 Kimyasal içermez</li>
+                                <li>✨ Ultra yumuşak silikon</li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="faq-item" data-category="shipping">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>🚚 Kargo süresi ve ücretleri nedir?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>🆓 ÜCRETSİZ KARGO:</strong> Tüm siparişlerde ücretsiz!</p>
+                            
+                            <p><strong>Teslimat süreleri:</strong></p>
+                            <ul>
+                                <li><span class="highlight">İstanbul, Ankara, İzmir:</span> 1-2 iş günü</li>
+                                <li><span class="highlight">Diğer iller:</span> 2-3 iş günü</li>
+                                <li><span class="highlight">Aynı gün teslimat:</span> İstanbul için +25 TL (14:00'a kadar siparişlerde)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="usage">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>🧴 Hangi temizleme ürünleriyle kullanabilirim?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>Tüm cilt tipine uygun temizleyicilerle kullanabilirsiniz:</strong></p>
+                            
+                            <ul>
+                                <li><span class="highlight">Yumuşak yüz temizleme jeli</span> (günlük kullanım)</li>
+                                <li><span class="highlight">Köpük temizleyici</span> (hassas cilt için)</li>
+                                <li><span class="highlight">Salisilik asitli temizleyici</span> (yağlı cilt için)</li>
+                                <li><span class="highlight">Micellar su</span> (pratik kullanım)</li>
+                            </ul>
+                            
+                            <div class="warning-box">
+                                <strong>❌ KULLANMAYIN:</strong> Granüllü peeling ürünleri, alkol bazlı tonikler, retinol içeren ürünlerle aynı anda kullanmayın.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="safety">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>🤱 Hamilelik ve emzirme döneminde kullanılabilir mi?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><span class="highlight">✅ EVET, güvenle kullanabilirsiniz!</span></p>
+                            
+                            <p><strong>Nedenleri:</strong></p>
+                            <ul>
+                                <li>%100 medikal silikon malzeme</li>
+                                <li>Kimyasal içermez</li>
+                                <li>Sadece fiziksel temizlik yapar</li>
+                                <li>Hormonal değişikliklere uygun</li>
+                            </ul>
+                            
+                            <p><strong>🤰 Hamilelik döneminde özel faydaları:</strong></p>
+                            <p>• Hormonal akne için güvenli çözüm</p>
+                            <p>• Cilt hassasiyeti artışında nazik bakım</p>
+                            <p>• Gebelik maskesi için önleyici bakım</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        {% endif %}
+        
+        {% comment %} Contact support section {% endcomment %}
+        {% if section.settings.show_support_contact %}
+        <div class="support-contact">
+            <h3>{{ section.settings.support_title | default: 'Yardıma mı İhtiyacınız Var?' }}</h3>
+            <p>{{ section.settings.support_description | default: 'Garanti süreciniz hakkında sorularınız için bizimle iletişime geçin.' }}</p>
+            
+            <div class="support-methods">
+                {% if section.settings.support_phone != blank %}
+                <a href="tel:{{ section.settings.support_phone }}" class="support-method">
+                    <span class="support-icon">📞</span>
+                    <span class="support-text">{{ section.settings.support_phone }}</span>
+                </a>
+                {% endif %}
+                
+                {% if section.settings.support_email != blank %}
+                <a href="mailto:{{ section.settings.support_email }}" class="support-method">
+                    <span class="support-icon">✉️</span>
+                    <span class="support-text">{{ section.settings.support_email }}</span>
+                </a>
+                {% endif %}
+                
+                {% if section.settings.support_whatsapp != blank %}
+                <a href="https://wa.me/{{ section.settings.support_whatsapp }}" class="support-method" target="_blank">
+                    <span class="support-icon">💬</span>
+                    <span class="support-text">WhatsApp Destek</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        
+        {% comment %} Final CTA {% endcomment %}
+        {% if section.settings.cta_button_text != blank %}
+        <div class="guarantee-cta">
+            <a href="{{ section.settings.cta_button_link | default: '/collections/all' }}" 
+               class="cta-button guarantee-cta-button">
+                {{ section.settings.cta_button_text }}
+            </a>
+            
+            {% if section.settings.cta_subtext != blank %}
+            <p class="cta-subtext">{{ section.settings.cta_subtext }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        {% comment %} Trust indicators strip {% endcomment %}
+        {% if section.settings.show_trust_strip %}
+        <div class="trust-indicators-strip">
+            <div class="trust-indicator-item">
+                <span class="trust-icon">🔒</span>
+                <span class="trust-text">{{ section.settings.trust_1_text | default: 'Güvenli Ödeme' }}</span>
+            </div>
+            <div class="trust-indicator-item">
+                <span class="trust-icon">🚚</span>
+                <span class="trust-text">{{ section.settings.trust_2_text | default: 'Hızlı Teslimat' }}</span>
+            </div>
+            <div class="trust-indicator-item">
+                <span class="trust-icon">⭐</span>
+                <span class="trust-text">{{ section.settings.trust_3_text | default: '5 Yıldız Hizmet' }}</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+:root {
+    --trust-green: #6B8E5A;
+}
+
+.guarantee-section {
+    padding: 4rem 5%;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.guarantee-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.guarantee-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.guarantee-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.guarantee-description {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Guarantee Seal */
+.guarantee-seal {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 3rem;
+}
+
+.guarantee-seal img {
+    max-width: 120px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
+.seal-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+}
+
+.seal-placeholder::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }  
+}
+
+.seal-icon {
+    font-size: 2rem;
+    z-index: 2;
+}
+
+.seal-text {
+    text-align: center;
+    color: white;
+    z-index: 2;
+}
+
+.seal-number {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+}
+
+.seal-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 0.25rem;
+}
+
+/* Enhanced Guarantee Features Grid */
+.guarantee-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.guarantee-feature {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.guarantee-feature:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.guarantee-feature .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.guarantee-feature h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.guarantee-feature p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+}
+
+/* Guarantee Steps */
+.guarantee-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.guarantee-step:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: white;
+    color: var(--trust-green);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.step-content h4 {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.step-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.step-link:hover {
+    border-bottom-color: white;
+}
+
+/* Guarantee Testimonial */
+.guarantee-testimonial {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    margin: 2rem 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testimonial-quote-icon {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1;
+}
+
+.guarantee-testimonial blockquote {
+    color: white;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.guarantee-testimonial cite {
+    color: rgba(255, 255, 255, 0.9);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.author-photo {
+    margin-top: 1rem;
+}
+
+.author-photo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Money Back Details */
+.money-back-details {
+    margin: 4rem 0;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+}
+
+.money-back-details h3 {
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.money-back-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.money-back-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.money-back-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+.money-back-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+    opacity: 0.9;
+}
+
+.money-back-content h4 {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.money-back-content p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Feature Details */
+.feature-details {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.detail-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+/* NEW FAQ Section Styles - Enhanced from second HTML */
+.guarantee-faq {
+    margin: 4rem 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.guarantee-faq h3 {
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.faq-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.category-tag {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    text-align: center;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    backdrop-filter: blur(10px);
+}
+
+.category-tag:hover,
+.category-tag.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.faq-question {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.faq-question .faq-icon {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease;
+    font-weight: 300;
+}
+
+.faq-question.active .faq-icon {
+    transform: rotate(45deg);
+    color: white;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.faq-answer.active {
+    max-height: 1000px;
+}
+
+.faq-answer-content {
+    padding: 0 1.5rem 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
+.faq-answer-content p {
+    margin-bottom: 1rem;
+}
+
+.faq-answer-content ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.faq-answer-content li {
+    margin-bottom: 0.5rem;
+}
+
+.highlight {
+    color: white;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+}
+
+.expert-note {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    font-style: italic;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.expert-note::before {
+    content: "👨‍⚕️";
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.warning-box {
+    background: rgba(255, 243, 205, 0.15);
+    border: 1px solid rgba(255, 230, 156, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Support Contact */
+.support-contact {
+    text-align: center;
+    margin: 3rem 0;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.support-contact h3 {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.support-contact p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.support-methods {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.support-method {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.support-method:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.support-icon {
+    font-size: 1.1rem;
+}
+
+/* Guarantee CTA */
+.guarantee-cta {
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.guarantee-cta-button {
+    background: white !important;
+    color: var(--trust-green) !important;
+    border: 2px solid white;
+    font-size: 1.1rem;
+    padding: 1.25rem 3rem;
+    margin-bottom: 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.guarantee-cta-button:hover {
+    background: #f8f8f8 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.cta-subtext {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Trust Indicators Strip */
+.trust-indicators-strip {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    flex-wrap: wrap;
+}
+
+.trust-indicator-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.trust-indicator-item .trust-icon {
+    font-size: 1.2rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .guarantee-features {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .guarantee-step {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .money-back-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .support-methods {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .trust-indicators-strip {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    
+    .seal-placeholder {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .seal-number {
+        font-size: 1.5rem;
+    }
+    
+    .guarantee-section {
+        padding: 3rem 3%;
+    }
+    
+    .faq-categories {
+        grid-template-columns: 1fr;
+    }
+    
+    .faq-question {
+        font-size: 1rem;
+        padding: 1.25rem;
+    }
+    
+    .faq-answer-content {
+        padding: 0 1.25rem 1.25rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .guarantee-section {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .guarantee-feature,
+    .guarantee-step,
+    .money-back-item,
+    .faq-item {
+        background: white !important;
+        border: 1px solid #ccc !important;
+        color: black !important;
+    }
+    
+    .seal-placeholder::before {
+        display: none;
+    }
+}
+
+/* Accessibility improvements */
+.faq-question:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+.support-method:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+.category-tag:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+/* High contrast mode */  
+@media (prefers-contrast: high) {
+    .guarantee-feature,
+    .guarantee-step,
+    .money-back-item,
+    .faq-item {
+        border-width: 2px;
+    }
+}
+</style>
+
+<script>
+// Enhanced FAQ toggle functionality
+function toggleFAQ(button) {
+    const faqItem = button.parentElement;
+    const answer = faqItem.querySelector('.faq-answer');
+    const icon = button.querySelector('.faq-icon');
+    
+    // Close all other FAQ items
+    const allFaqItems = document.querySelectorAll('.faq-item');
+    allFaqItems.forEach(item => {
+        if (item !== faqItem) {
+            const otherAnswer = item.querySelector('.faq-answer');
+            const otherButton = item.querySelector('.faq-question');
+            const otherIcon = item.querySelector('.faq-icon');
+            
+            otherAnswer.classList.remove('active');
+            otherButton.classList.remove('active');
+            otherAnswer.style.maxHeight = '0px';
+            if (otherIcon) otherIcon.textContent = '+';
+        }
+    });
+    
+    // Toggle current FAQ item
+    if (answer.classList.contains('active')) {
+        // Close
+        answer.classList.remove('active');
+        button.classList.remove('active');
+        answer.style.maxHeight = '0px';
+        icon.textContent = '+';
+    } else {
+        // Open
+        answer.classList.add('active');
+        button.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.textContent = '×';
+    }
+}
+
+// FAQ filtering functionality
+function filterFAQ(category) {
+    const faqItems = document.querySelectorAll('.faq-item');
+    const categoryTags = document.querySelectorAll('.category-tag');
+    
+    // Update active category
+    categoryTags.forEach(tag => tag.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Show/hide FAQ items
+    faqItems.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    
+    // Close all open FAQs when filtering
+    document.querySelectorAll('.faq-answer.active').forEach(answer => {
+        answer.classList.remove('active');
+        answer.previousElementSibling.classList.remove('active');
+        answer.style.maxHeight = '0px';
+        const icon = answer.previousElementSibling.querySelector('.faq-icon');
+        if (icon) icon.textContent = '+';
+    });
+}
+
+// Enhanced animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate guarantee features on scroll
+    const guaranteeFeatures = document.querySelectorAll('.guarantee-feature, .guarantee-step, .money-back-item');
+    
+    const guaranteeObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 150);
+                guaranteeObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    guaranteeFeatures.forEach(feature => {
+        feature.style.opacity = '0';
+        feature.style.transform = 'translateY(30px)';
+        feature.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        guaranteeObserver.observe(feature);
+    });
+    
+    // Animate FAQ items on scroll
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    const faqObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+                faqObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    faqItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        faqObserver.observe(item);
+    });
+    
+    // Animate guarantee seal
+    const guaranteeSeal = document.querySelector('.guarantee-seal');
+    if (guaranteeSeal) {
+        const sealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transform = 'scale(1)';
+                    entry.target.style.opacity = '1';
+                    sealObserver.unobserve(entry.target);
+                }
+            });
+        });
+        
+        guaranteeSeal.style.transform = 'scale(0.8)';
+        guaranteeSeal.style.opacity = '0';
+        guaranteeSeal.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease';
+        sealObserver.observe(guaranteeSeal);
+    }
+    
+    // Add floating animation to seal
+    const sealPlaceholder = document.querySelector('.seal-placeholder');
+    if (sealPlaceholder) {
+        let floatDirection = 1;
+        setInterval(() => {
+            sealPlaceholder.style.transform = `translateY(${floatDirection * 3}px)`;
+            floatDirection *= -1;
+        }, 2000);
+    }
+    
+    // Track guarantee engagement
+    const guaranteeSection = document.querySelector('.guarantee-section');
+    if (guaranteeSection) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Track guarantee section view
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'view_guarantee_section', {
+                            'event_category': 'engagement',
+                            'event_label': 'guarantee_policy'
+                        });
+                    }
+                    sectionObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+        
+        sectionObserver.observe(guaranteeSection);
+    }
+    
+    // Enhanced CTA button interaction
+    const guaranteeCTA = document.querySelector('.guarantee-cta-button');
+    if (guaranteeCTA) {
+        guaranteeCTA.addEventListener('click', function(e) {
+            // Track guarantee CTA click
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click_guarantee_cta', {
+                    'event_category': 'conversion',
+                    'event_label': 'guarantee_confidence'
+                });
+            }
+            
+            // Add click animation
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'translateY(-3px) scale(1)';
+            }, 150);
+        });
+    }
+    
+    // Track FAQ interactions
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            const questionText = this.querySelector('span').textContent;
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'faq_interaction', {
+                    'event_category': 'engagement',
+                    'event_label': questionText.substring(0, 50),
+                    'value': 1
+                });
+            }
+        });
+    });
+    
+    // Track category filtering
+    const categoryTags = document.querySelectorAll('.category-tag');
+    categoryTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            const category = this.textContent;
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'faq_filter', {
+                    'event_category': 'engagement',
+                    'event_label': category,
+                    'value': 1
+                });
+            }
+        });
+    });
+});
+
+// Support method tracking
+document.addEventListener('DOMContentLoaded', function() {
+    const supportMethods = document.querySelectorAll('.support-method');
+    
+    supportMethods.forEach(method => {
+        method.addEventListener('click', function() {
+            const methodType = this.querySelector('.support-text').textContent.toLowerCase();
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'contact_support', {
+                    'event_category': 'support',
+                    'event_label': methodType,
+                    'value': 1
+                });
+            }
+        });
+    });
+});
+
+// Global functions for external access
+window.toggleFAQ = toggleFAQ;
+window.filterFAQ = filterFAQ;
+</script>
+
+{% schema %}
+{
+  "name": "Garanti Bölümü",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Ana İçerik"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Başlık",
+      "default": "Risk Almıyorsunuz!"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Açıklama",
+      "default": "Ürünümüzden %100 memnun kalacağınızdan o kadar eminiz ki, 30 gün içinde memnun kalmazsanız paranızı iade ediyoruz."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arkaplan Rengi",
+      "default": "#6B8E5A"
+    },
+    {
+      "type": "header",
+      "content": "Garanti Mührü"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_guarantee_seal",
+      "label": "Garanti Mührünü Göster",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "seal_image",
+      "label": "Mühür Görseli"
+    },
+    {
+      "type": "text",
+      "id": "seal_alt",
+      "label": "Mühür Alt Metni",
+      "default": "Garanti Mührü"
+    },
+    {
+      "type": "text",
+      "id": "seal_icon",
+      "label": "Mühür İkonu (Emoji)",
+      "default": "🛡️"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_days",
+      "label": "Garanti Gün Sayısı",
+      "default": "30"
+    },
+    {
+      "type": "text",
+      "id": "seal_label",
+      "label": "Mühür Etiketi",
+      "default": "GÜN GARANTİ"
+    },
+    {
+      "type": "header",
+      "content": "Para İade Detayları"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_money_back_details",
+      "label": "Para İade Detaylarını Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "money_back_title",
+      "label": "Para İade Başlığı",
+      "default": "Para İade Koşulları"
+    },
+    {
+      "type": "text",
+      "id": "return_condition_1_title",
+      "label": "İade Koşulu 1 Başlığı",
+      "default": "Kolay İade"
+    },
+    {
+      "type": "textarea",
+      "id": "return_condition_1_text",
+      "label": "İade Koşulu 1 Metni",
+      "default": "Ürünü orijinal ambalajında iade edin"
+    },
+    {
+      "type": "text",
+      "id": "return_condition_2_title",
+      "label": "İade Koşulu 2 Başlığı",
+      "default": "Hızlı İade"
+    },
+    {
+      "type": "textarea",
+      "id": "return_condition_2_text",
+      "label": "İade Koşulu 2 Metni",
+      "default": "3-5 iş günü içinde paranız iade edilir"
+    },
+    {
+      "type": "text",
+      "id": "return_condition_3_title",
+      "label": "İade Koşulu 3 Başlığı",
+      "default": "Ücretsiz İade"
+    },
+    {
+      "type": "textarea",
+      "id": "return_condition_3_text",
+      "label": "İade Koşulu 3 Metni",
+      "default": "İade kargo masrafı tarafımızdan karşılanır"
+    },
+    {
+      "type": "header",
+      "content": "SSS Bölümü"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_faq",
+      "label": "SSS Bölümünü Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "SSS Başlığı",
+      "default": "Sık Sorulan Sorular"
+    },
+    {
+      "type": "header",
+      "content": "Destek İletişimi"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_support_contact",
+      "label": "Destek İletişimini Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "support_title",
+      "label": "Destek Başlığı",
+      "default": "Yardıma mı İhtiyacınız Var?"
+    },
+    {
+      "type": "textarea",
+      "id": "support_description",
+      "label": "Destek Açıklaması",
+      "default": "Garanti süreciniz hakkında sorularınız için bizimle iletişime geçin."
+    },
+    {
+      "type": "text",
+      "id": "support_phone",
+      "label": "Destek Telefonu",
+      "default": "0850 123 45 67"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Destek E-postası",
+      "default": "destek@fulbeauty.com"
+    },
+    {
+      "type": "text",
+      "id": "support_whatsapp",
+      "label": "Destek WhatsApp",
+      "default": "905001234567"
+    },
+    {
+      "type": "header",
+      "content": "Call-to-Action"
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Buton Metni",
+      "default": "Hemen Sipariş Ver"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_link",
+      "label": "CTA Buton Linki",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "cta_subtext",
+      "label": "CTA Alt Metni",
+      "default": "Risk almadan deneyin, memnun kalmazsanız paranızı geri alın"
+    },
+    {
+      "type": "header",
+      "content": "Güven Göstergeleri"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_strip",
+      "label": "Güven Şeridini Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_1_text",
+      "label": "Güven Göstergesi 1",
+      "default": "Güvenli Ödeme"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_text",
+      "label": "Güven Göstergesi 2",
+      "default": "Hızlı Teslimat"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_text",
+      "label": "Güven Göstergesi 3",
+      "default": "5 Yıldız Hizmet"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "guarantee_feature",
+      "name": "Garanti Özelliği",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "İkon (Emoji)",
+          "default": "🔄"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Başlık",
+          "default": "30 Gün İade"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Açıklama",
+          "default": "Koşulsuz para iade garantisi"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_details",
+          "label": "Detayları Göster",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "detail_1_icon",
+          "label": "Detay 1 İkonu",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "detail_1",
+          "label": "Detay 1"
+        },
+        {
+          "type": "text",
+          "id": "detail_2_icon",
+          "label": "Detay 2 İkonu",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "detail_2",
+          "label": "Detay 2"
+        }
+      ]
+    },
+    {
+      "type": "guarantee_step",
+      "name": "Garanti Adımı",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Adım Numarası",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "step_title",
+          "label": "Adım Başlığı",
+          "default": "İletişime Geçin"
+        },
+        {
+          "type": "textarea",
+          "id": "step_description",
+          "label": "Adım Açıklaması",
+          "default": "Müşteri hizmetlerimizle iletişime geçerek iade talebinizi bildirin."
+        },
+        {
+          "type": "text",
+          "id": "step_link_text",
+          "label": "Adım Link Metni"
+        },
+        {
+          "type": "url",
+          "id": "step_link_url",
+          "label": "Adım Link URL'si"
+        }
+      ]
+    },
+    {
+      "type": "testimonial_quote",
+      "name": "Müşteri Yorumu",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote_text",
+          "label": "Alıntı Metni",
+          "default": "30 gün garanti sayesinde hiç endişe duymadan denedim. Gerçekten de memnun kaldım!"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Yazar Adı",
+          "default": "Müşteri A."
+        },
+        {
+          "type": "image_picker",
+          "id": "author_photo",
+          "label": "Yazar Fotoğrafı"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Garanti Bölümü",
+      "category": "Guarantee",
+      "blocks": [
+        {
+          "type": "guarantee_feature",
+          "settings": {
+            "icon": "🔄",
+            "title": "30 Gün İade",
+            "description": "Koşulsuz para iade garantisi"
+          }
+        },
+        {
+          "type": "guarantee_feature",
+          "settings": {
+            "icon": "🚀",
+            "title": "Hızlı Sonuç",
+            "description": "İlk haftadan görünür fark"
+          }
+        },
+        {
+          "type": "guarantee_feature",
+          "settings": {
+            "icon": "📞",
+            "title": "7/24 Destek",
+            "description": "Her zaman yanınızdayız"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

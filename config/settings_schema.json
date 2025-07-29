@@ -1,0 +1,148 @@
+[
+  {
+    "name": "Renkler",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Ana Renk",
+        "default": "#8B6F4D"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color", 
+        "label": "İkincil Renk",
+        "default": "#D4C4B0"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Vurgu Rengi",
+        "default": "#A0522D"
+      },
+      {
+        "type": "color",
+        "id": "trust_green",
+        "label": "Güven Yeşili",
+        "default": "#6B8E5A"
+      }
+    ]
+  },
+  {
+    "name": "SEO Ayarları",
+    "settings": [
+      {
+        "type": "text",
+        "id": "google_analytics_id",
+        "label": "Google Analytics ID",
+        "info": "Örnek: GA-XXXXXXXXX veya G-XXXXXXXXXX"
+      },
+      {
+        "type": "text",
+        "id": "google_search_console",
+        "label": "Google Search Console Doğrulama Kodu"
+      },
+      {
+        "type": "textarea",
+        "id": "site_default_description",
+        "label": "Site Varsayılan Açıklaması",
+        "default": "Dermatoloji uzmanı onaylı FulBeauty silikon yüz temizleme fırçası. Hassas ciltler için güvenli, klinik testli. 30 gün garanti, ücretsiz kargo."
+      },
+      {
+        "type": "text",
+        "id": "site_keywords",
+        "label": "Site Anahtar Kelimeleri",
+        "default": "silikon yüz temizleme fırçası, dermatoloji onaylı, cilt temizleme, hassas cilt, beauty"
+      }
+    ]
+  },
+  {
+    "name": "Sosyal Medya",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok_link",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_handle",
+        "label": "Twitter Kullanıcı Adı",
+        "default": "@fulbeauty"
+      }
+    ]
+  },
+  {
+    "name": "İletişim Bilgileri",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Telefon Numarası",
+        "default": "+90 546 833 66 56"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "E-posta Adresi",
+        "default": "fulsupur@gmail.com"
+      },
+      {
+        "type": "textarea",
+        "id": "store_address",
+        "label": "Mağaza Adresi",
+        "default": "İstanbul, Türkiye"
+      }
+    ]
+  },
+  {
+    "name": "WhatsApp",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_whatsapp_float",
+        "label": "WhatsApp Butonunu Göster",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp Numarası",
+        "default": "905468336656"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_message",
+        "label": "WhatsApp Mesajı",
+        "default": "Merhaba! Ful Beauty ürünleri hakkında bilgi almak istiyorum."
+      }
+    ]
+  },
+  {
+    "name": "Güven Rozeti",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_trust_badge",
+        "label": "Güven Rozetini Göster",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "trust_badge_text",
+        "label": "Güven Rozeti Metni",
+        "default": "✓ Dermatoloji Uzmanı Onaylı"
+      }
+    ]
+  }
+]

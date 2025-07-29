@@ -1,0 +1,452 @@
+<section id="products" class="product-showcase section">
+    <div class="container">
+        <div class="product-grid grid-2">
+            <!-- FIXED SLIDER AREA -->
+            <div class="product-image">
+                {% assign image_count = 0 %}
+                {% assign images = '' %}
+                
+                {% if section.settings.product_image_1 != blank %}
+                    {% assign image_count = image_count | plus: 1 %}
+                    {% assign images = images | append: section.settings.product_image_1.id | append: ',' %}
+                {% endif %}
+                {% if section.settings.product_image_2 != blank %}
+                    {% assign image_count = image_count | plus: 1 %}
+                    {% assign images = images | append: section.settings.product_image_2.id | append: ',' %}
+                {% endif %}
+                {% if section.settings.product_image_3 != blank %}
+                    {% assign image_count = image_count | plus: 1 %}
+                    {% assign images = images | append: section.settings.product_image_3.id | append: ',' %}
+                {% endif %}
+                {% if section.settings.product_image_4 != blank %}
+                    {% assign image_count = image_count | plus: 1 %}
+                    {% assign images = images | append: section.settings.product_image_4.id | append: ',' %}
+                {% endif %}
+                {% if section.settings.product_image_5 != blank %}
+                    {% assign image_count = image_count | plus: 1 %}
+                    {% assign images = images | append: section.settings.product_image_5.id | append: ',' %}
+                {% endif %}
+
+                {% if image_count > 0 %}
+                    <div class="product-slider-container">
+                        <div class="product-slider" id="productSlider">
+                            {% if section.settings.product_image_1 != blank %}
+                                <div class="slider-item active">
+                                    {{ section.settings.product_image_1 | img_url: '600x600' | img_tag: section.settings.product_title }}
+                                </div>
+                            {% endif %}
+                            {% if section.settings.product_image_2 != blank %}
+                                <div class="slider-item">
+                                    {{ section.settings.product_image_2 | img_url: '600x600' | img_tag: section.settings.product_title }}
+                                </div>
+                            {% endif %}
+                            {% if section.settings.product_image_3 != blank %}
+                                <div class="slider-item">
+                                    {{ section.settings.product_image_3 | img_url: '600x600' | img_tag: section.settings.product_title }}
+                                </div>
+                            {% endif %}
+                            {% if section.settings.product_image_4 != blank %}
+                                <div class="slider-item">
+                                    {{ section.settings.product_image_4 | img_url: '600x600' | img_tag: section.settings.product_title }}
+                                </div>
+                            {% endif %}
+                            {% if section.settings.product_image_5 != blank %}
+                                <div class="slider-item">
+                                    {{ section.settings.product_image_5 | img_url: '600x600' | img_tag: section.settings.product_title }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        {% if image_count > 1 %}
+                            <button class="slider-btn prev-btn" onclick="changeImage(-1)">‹</button>
+                            <button class="slider-btn next-btn" onclick="changeImage(1)">›</button>
+                            
+                            <div class="slider-counter">
+                                <span id="currentImageNum">1</span> / {{ image_count }}
+                            </div>
+                            
+                            <div class="slider-dots">
+                                {% for i in (1..image_count) %}
+                                    <span class="slider-dot {% if forloop.first %}active{% endif %}" onclick="goToImage({{ forloop.index0 }})"></span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="product-placeholder">
+                        <div>🎯</div>
+                        <div>Premium Silikon</div>
+                        <div>Cilt Temizleme Fırçası</div>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- ORIGINAL PRODUCT INFO - UNCHANGED -->
+            <div class="product-info">
+                <h2>{{ section.settings.product_title | default: 'Devrim Niteliğinde Cilt Bakım Deneyimi' }}</h2>
+                <ul class="product-features">
+                    {% assign features = section.settings.product_features | split: '
+' %}
+                    {% for feature in features %}
+                        {% if feature != blank %}
+                            <li>{{ feature }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <div class="price-container">
+                    <div class="price">{{ section.settings.product_price | default: '₺899' }}</div>
+                    <div class="price-note">{{ section.settings.shipping_text | default: '💝 Ücretsiz kargo + 30 gün deneme' }}</div>
+                </div>
+                <a href="{{ section.settings.order_url | default: '/cart' }}" class="cta-button">
+                    {{ section.settings.order_button_text | default: 'Hemen Sipariş Ver' }}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* PRESERVE ORIGINAL GRID STRUCTURE */
+    .product-grid.grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+    }
+
+    @media (max-width: 768px) {
+        .product-grid.grid-2 {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+    }
+
+    /* FIXED SLIDER STYLES */
+    .product-slider-container {
+        position: relative;
+        width: 100%;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .product-slider {
+        position: relative;
+        width: 100%;
+        height: 450px;
+        overflow: hidden;
+    }
+
+    .slider-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .slider-item.active {
+        opacity: 1;
+    }
+
+    .slider-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* NAVIGATION BUTTONS */
+    .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.9);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #333;
+        transition: all 0.3s ease;
+        z-index: 10;
+        opacity: 0;
+    }
+
+    .product-slider-container:hover .slider-btn {
+        opacity: 1;
+    }
+
+    .slider-btn:hover {
+        background: white;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .prev-btn {
+        left: 15px;
+    }
+
+    .next-btn {
+        right: 15px;
+    }
+
+    /* COUNTER */
+    .slider-counter {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    /* DOTS */
+    .slider-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+    }
+
+    .slider-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .slider-dot.active {
+        background: white;
+        width: 20px;
+        border-radius: 10px;
+    }
+
+    .slider-dot:hover {
+        background: rgba(255,255,255,0.8);
+    }
+
+    /* PLACEHOLDER STYLING */
+    .product-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 450px;
+        background: #f8f9fa;
+        color: #6c757d;
+        text-align: center;
+        border-radius: 16px;
+        font-size: 1.1rem;
+    }
+
+    .product-placeholder div:first-child {
+        font-size: 3rem;
+        margin-bottom: 15px;
+    }
+
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 768px) {
+        .product-slider {
+            height: 350px;
+        }
+        
+        .product-placeholder {
+            height: 350px;
+        }
+        
+        .slider-btn {
+            width: 35px;
+            height: 35px;
+            font-size: 16px;
+        }
+        
+        .prev-btn {
+            left: 10px;
+        }
+        
+        .next-btn {
+            right: 10px;
+        }
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.getElementById('productSlider');
+    if (!slider) return;
+    
+    const slides = slider.querySelectorAll('.slider-item');
+    const dots = document.querySelectorAll('.slider-dot');
+    const counter = document.getElementById('currentImageNum');
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    
+    // Only initialize if we have multiple slides
+    if (totalSlides <= 1) return;
+    
+    window.changeImage = function(direction) {
+        // Remove active class from current slide and dot
+        slides[currentIndex].classList.remove('active');
+        if (dots[currentIndex]) dots[currentIndex].classList.remove('active');
+        
+        // Calculate new index
+        currentIndex += direction;
+        
+        if (currentIndex >= totalSlides) {
+            currentIndex = 0;
+        } else if (currentIndex < 0) {
+            currentIndex = totalSlides - 1;
+        }
+        
+        // Add active class to new slide and dot
+        slides[currentIndex].classList.add('active');
+        if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+        
+        // Update counter
+        if (counter) counter.textContent = currentIndex + 1;
+    }
+    
+    window.goToImage = function(index) {
+        // Remove active class from current slide and dot
+        slides[currentIndex].classList.remove('active');
+        if (dots[currentIndex]) dots[currentIndex].classList.remove('active');
+        
+        // Set new index
+        currentIndex = index;
+        
+        // Add active class to new slide and dot
+        slides[currentIndex].classList.add('active');
+        if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+        
+        // Update counter
+        if (counter) counter.textContent = currentIndex + 1;
+    }
+    
+    // Touch/Swipe support for mobile
+    let startX = 0;
+    let isDragging = false;
+    
+    slider.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+    });
+    
+    slider.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+        
+        if (Math.abs(diffX) > 50) { // Minimum swipe distance
+            if (diffX > 0) {
+                changeImage(1); // Swipe left - next image
+            } else {
+                changeImage(-1); // Swipe right - previous image
+            }
+        }
+        
+        isDragging = false;
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            changeImage(-1);
+        } else if (e.key === 'ArrowRight') {
+            changeImage(1);
+        }
+    });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Product Slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Ürün Görselleri"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_1",
+      "label": "Ürün Görseli 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_2",
+      "label": "Ürün Görseli 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_3",
+      "label": "Ürün Görseli 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_4",
+      "label": "Ürün Görseli 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_5",
+      "label": "Ürün Görseli 5"
+    },
+    {
+      "type": "header",
+      "content": "Ürün Bilgileri"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Ürün Başlığı",
+      "default": "Devrim Niteliğinde Cilt Bakım Deneyimi"
+    },
+    {
+      "type": "textarea",
+      "id": "product_features",
+      "label": "Ürün Özellikleri (Her satırda bir özellik)",
+      "default": "🌟 Çift taraflı premium silikon teknoloji\n💧 Derin gözenek temizliği\n✨ Tüm cilt tiplerine uygun\n🧼 %100 su geçirmez tasarım"
+    },
+    {
+      "type": "text",
+      "id": "product_price",
+      "label": "Ürün Fiyatı",
+      "default": "₺899"
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": "Kargo Bilgisi",
+      "default": "💝 Ücretsiz kargo + 30 gün deneme"
+    },
+    {
+      "type": "text",
+      "id": "order_button_text",
+      "label": "Sipariş Buton Metni",
+      "default": "Hemen Sipariş Ver"
+    },
+    {
+      "type": "url",
+      "id": "order_url",
+      "label": "Sipariş Buton URL'si"
+    }
+  ],
+  "presets": [{"name": "Product Slider"}]
+}
+{% endschema %}

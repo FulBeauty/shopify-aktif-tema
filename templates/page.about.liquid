@@ -1,0 +1,113 @@
+{% comment %}
+  Hakkımızda Sayfası - FulBeauty
+  GitHub teması + önceki çalışma entegrasyonu
+{% endcomment %}
+
+<div class="page-template fade-in">
+  <div class="page-header">
+    <div class="container">
+      <h1>{{ page.title | default: 'Hakkımızda' }}</h1>
+      <p>Güzelliğinizin En Güvenilir Partneri</p>
+    </div>
+  </div>
+  
+  <div class="page-content">
+    <div class="container">
+      
+      <!-- Ana İçerik -->
+      {% if page.content != blank %}
+        <div class="content-section">
+          {{ page.content }}
+        </div>
+      {% else %}
+        <!-- Varsayılan İçerik -->
+        <div class="content-section">
+          <h2>Hikayemiz</h2>
+          <div class="highlight-box">
+            <p><strong>FulBeauty</strong>, her kadının doğal güzelliğini ortaya çıkarması gerektiğine inanan bir markadır. 2024 yılında kurulan markamız, yenilikçi ve etkili cilt bakım ürünleri sunarak, milyonlarca kadının günlük bakım rutinini dönüştürmeyi hedeflemiştir.</p>
+          </div>
+          
+          <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem;">
+            Cilt bakımının sadece bir rutindan çok daha fazlası olduğuna inanıyoruz. Bu, kendinize gösterdiğiniz sevgi ve özenin bir yansımasıdır. Bu nedenle, her ürünümüzü en yüksek kalite standartlarında, hassas ciltler için özel olarak tasarlıyoruz.
+          </p>
+        </div>
+      {% endif %}
+      
+      <!-- Değerlerimiz -->
+      <div class="content-section">
+        <h2>Değerlerimiz</h2>
+        <div class="feature-grid">
+          {% assign values = 'Kalite Güvencesi|💎|Tüm ürünlerimiz dermatolog onaylı ve hassas ciltler için test edilmiştir.,Doğal İçerikler|🌿|Cildinize zarar verebilecek sert kimyasallardan kaçınıyor doğal bileşenleri tercih ediyoruz.,İnovasyon|🚀|Sürekli araştırmaya dayalı ürün geliştirme yaklaşımımızla yenilikçi çözümler sunuyoruz.' | split: ',' %}
+          
+          {% for value in values %}
+            {% assign value_parts = value | split: '|' %}
+            <div class="feature-card">
+              <h3>{{ value_parts[1] }} {{ value_parts[0] }}</h3>
+              <p>{{ value_parts[2] }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <!-- Neden FulBeauty -->
+      <div class="content-section">
+        <h2>Neden FulBeauty?</h2>
+        <div class="highlight-box">
+          <p style="margin-bottom: 1rem;"><strong>🏆 Uzman Onayı:</strong> Tüm ürünlerimiz dermatoloji uzmanları tarafından test edilmiş ve onaylanmıştır.</p>
+          <p style="margin-bottom: 1rem;"><strong>💝 Müşteri Memnuniyeti:</strong> %98 müşteri memnuniyet oranı ile sektörde öncü konumdayız.</p>
+          <p style="margin-bottom: 1rem;"><strong>📦 Hızlı Teslimat:</strong> Siparişlerinizi aynı gün kargoya teslim ediyor, 1-2 gün içinde elinizde olmasını sağlıyoruz.</p>
+          <p><strong>🔄 Kolay İade:</strong> 30 gün içinde koşulsuz iade garantisi sunuyoruz.</p>
+        </div>
+      </div>
+      
+      <!-- İstatistikler -->
+      <div class="content-section">
+        <h2>Rakamlarla FulBeauty</h2>
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0;">
+          <div class="stat-item" style="text-align: center; padding: 2rem; background: var(--surface-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+            <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); font-family: var(--font-heading);">10,000+</div>
+            <div style="color: var(--text-secondary); font-weight: 600;">Mutlu Müşteri</div>
+          </div>
+          <div class="stat-item" style="text-align: center; padding: 2rem; background: var(--surface-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+            <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); font-family: var(--font-heading);">%98</div>
+            <div style="color: var(--text-secondary); font-weight: 600;">Memnuniyet Oranı</div>
+          </div>
+          <div class="stat-item" style="text-align: center; padding: 2rem; background: var(--surface-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+            <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); font-family: var(--font-heading);">24/7</div>
+            <div style="color: var(--text-secondary); font-weight: 600;">Müşteri Desteği</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sertifikalar -->
+      <div class="content-section">
+        <h2>Sertifikalarımız ve Onaylarımız</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>🏥 Dermatoloji Onayı</h3>
+            <p>Tüm ürünlerimiz dermatoloji uzmanları tarafından klinik testlerden geçirilmiştir.</p>
+          </div>
+          <div class="feature-card">
+            <h3>🔬 CE Sertifikası</h3>
+            <p>Avrupa Birliği medikal cihaz standartlarına uygun üretim sertifikamız mevcuttur.</p>
+          </div>
+          <div class="feature-card">
+            <h3>🌿 Hipoalerjenik Test</h3>
+            <p>Hassas ciltler için güvenli olduğu laboratuvar testleri ile kanıtlanmıştır.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- CTA Bölümü -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="{{ routes.all_products_collection_url }}" class="cta-button">
+          Ürünlerimizi Keşfedin
+        </a>
+        <a href="{{ pages['contact'].url | default: '/pages/contact' }}" class="cta-button secondary" style="margin-left: 1rem;">
+          Bize Ulaşın
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</div>

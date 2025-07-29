@@ -1,0 +1,51 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "İçeriğe geç"
+    },
+    "meta": {
+      "tags": "Etiketler", 
+      "page": "Sayfa {{ page }}"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menü",
+      "cart_count": {
+        "one": "{{ count }} ürün",
+        "other": "{{ count }} ürün"
+      }
+    },
+    "hero": {
+      "default_title_highlight": "Dermatoloji Uzmanı Onaylı",
+      "default_title_main": "Premium Silikon Cilt Temizleme Fırçası", 
+      "default_description": "Cilt tipinize özel analiz ile eşleştirilen, klinik testlerden geçmiş premium silikon fırçalar.",
+      "cta_button": "Hemen Keşfet"
+    }
+  },
+  "templates": {
+    "cart": {
+      "cart": "Sepet"
+    },
+    "404": {
+      "title": "Sayfa bulunamadı"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Sepete Ekle",
+      "sold_out": "Tükendi", 
+      "price": {
+        "regular_price": "Normal fiyat",
+        "sale_price": "İndirimli fiyat"
+      }
+    }
+  },
+  "customer": {
+    "login_page": {
+      "title": "Giriş Yap",
+      "email": "E-posta",
+      "password": "Şifre"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<header class="header" id="shopify-section-header">
+    <nav class="navbar">
+        <a href="{{ routes.root_url }}" class="logo">
+            {% if section.settings.logo != blank %}
+                {{ section.settings.logo | img_url: '200x' | img_tag: shop.name, 'logo-image' }}
+            {% else %}
+                {{ section.settings.site_title | default: shop.name }}
+            {% endif %}
+        </a>
+        
+        <ul class="nav-links">
+            {% for link in linklists[section.settings.main_menu].links %}
+                <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <a href="{{ routes.cart_url }}" class="cart-icon">
+            🛒 {{ 'templates.cart.cart' | t }}
+            {%- if cart != empty -%}
+                <span class="cart-count-bubble">{{ cart.item_count }}</span>
+            {%- endif -%}
+        </a>
+    </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "site_title",
+      "label": "Site Title",
+      "default": "Ful Beauty"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

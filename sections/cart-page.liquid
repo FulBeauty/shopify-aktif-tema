@@ -1,0 +1,583 @@
+<!-- sections/cart-page.liquid -->
+<style>
+  :root {
+    --primary-color: {{ section.settings.primary_color }};
+    --secondary-color: {{ section.settings.secondary_color }};
+    --accent-color: {{ section.settings.accent_color }};
+    --background-color: {{ section.settings.background_color }};
+    --text-color: {{ section.settings.text_color }};
+    --border-radius: {{ section.settings.border_radius }}px;
+    --font-family: {{ section.settings.font_family.family }}, sans-serif;
+  }
+
+  .custom-cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: var(--font-family);
+    background: var(--background-color);
+    color: var(--text-color);
+  }
+
+  .cart-header {
+    text-align: center;
+    padding: 40px 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+  }
+
+  .cart-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .cart-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+
+  .cart-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+  }
+
+  .cart-items {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .item-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .item-details h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+  }
+
+  .item-price {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    font-weight: 600;
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .quantity-btn {
+    background: #f8f8f8;
+    border: none;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .quantity-btn:hover {
+    background: var(--secondary-color);
+    color: white;
+  }
+
+  .quantity-input {
+    width: 50px;
+    height: 35px;
+    text-align: center;
+    border: none;
+    background: white;
+  }
+
+  .cart-summary {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    height: fit-content;
+  }
+
+  .summary-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px 0;
+  }
+
+  .summary-row.total {
+    border-top: 2px solid var(--secondary-color);
+    padding-top: 20px;
+    margin-top: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .checkout-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+  }
+
+  .checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  .empty-cart {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 20px;
+    background: white;
+    border-radius: var(--border-radius);
+  }
+
+  .empty-cart-icon {
+    font-size: 4rem;
+    color: #ddd;
+    margin-bottom: 20px;
+  }
+
+  .trust-badges {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: var(--border-radius);
+  }
+
+  .trust-badge {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .trust-badge-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cart-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .cart-item {
+      grid-template-columns: 80px 1fr;
+      gap: 15px;
+    }
+    
+    .quantity-controls, .item-price {
+      grid-column: 2;
+      margin-top: 10px;
+    }
+  }
+</style>
+
+<div class="custom-cart-container">
+  {% if section.settings.show_header %}
+    <div class="cart-header">
+      <h1 class="cart-title">{{ section.settings.header_title }}</h1>
+      <p class="cart-subtitle">{{ section.settings.header_subtitle }}</p>
+    </div>
+  {% endif %}
+
+  <div class="cart-content" id="cart-content">
+    <!-- Cart content will be loaded here -->
+  </div>
+</div>
+
+<script>
+  let cartData = null;
+
+  // Cart yükleme
+  document.addEventListener('DOMContentLoaded', function() {
+    loadCart();
+  });
+
+  function loadCart() {
+    fetch('/cart.js')
+      .then(response => response.json())
+      .then(cart => {
+        cartData = cart;
+        renderCart();
+      })
+      .catch(error => {
+        console.error('Cart loading error:', error);
+        renderEmptyCart();
+      });
+  }
+
+  function renderCart() {
+    const cartContent = document.getElementById('cart-content');
+    
+    if (!cartData || cartData.item_count === 0) {
+      renderEmptyCart();
+      return;
+    }
+
+    cartContent.innerHTML = `
+      <div class="cart-items">
+        <h2>{{ section.settings.items_title }} (${cartData.item_count} ürün)</h2>
+        ${cartData.items.map(item => `
+          <div class="cart-item" data-key="${item.key}">
+            <div class="item-image">
+              <img src="${item.image || '/assets/no-image.jpg'}" alt="${item.product_title}">
+            </div>
+            
+            <div class="item-details">
+              <h3>${item.product_title}</h3>
+              ${item.variant_title ? `<p>${item.variant_title}</p>` : ''}
+              <div class="item-price">${formatMoney(item.price)}</div>
+            </div>
+            
+            <div class="quantity-controls">
+              <button class="quantity-btn" onclick="updateQuantity('${item.key}', ${item.quantity - 1})">-</button>
+              <input type="number" class="quantity-input" value="${item.quantity}" 
+                     onchange="updateQuantity('${item.key}', this.value)" min="1">
+              <button class="quantity-btn" onclick="updateQuantity('${item.key}', ${item.quantity + 1})">+</button>
+            </div>
+            
+            <div class="item-total">
+              ${formatMoney(item.line_price)}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      
+      <div class="cart-summary">
+        <h2 class="summary-title">{{ section.settings.summary_title }}</h2>
+        
+        <div class="summary-row">
+          <span>Ara Toplam:</span>
+          <span>${formatMoney(cartData.total_price)}</span>
+        </div>
+        
+        {% if section.settings.show_shipping %}
+        <div class="summary-row">
+          <span>Kargo:</span>
+          <span>{{ section.settings.shipping_text }}</span>
+        </div>
+        {% endif %}
+        
+        <div class="summary-row total">
+          <span>Toplam:</span>
+          <span>${formatMoney(cartData.total_price)}</span>
+        </div>
+        
+        <button class="checkout-btn" onclick="goToCheckout()">
+          {{ section.settings.checkout_button_text }}
+        </button>
+        
+        {% if section.settings.show_trust_badges %}
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <span class="trust-badge-icon">{{ section.settings.trust_badge_1_icon }}</span>
+            <div>{{ section.settings.trust_badge_1_text }}</div>
+          </div>
+          <div class="trust-badge">
+            <span class="trust-badge-icon">{{ section.settings.trust_badge_2_icon }}</span>
+            <div>{{ section.settings.trust_badge_2_text }}</div>
+          </div>
+          <div class="trust-badge">
+            <span class="trust-badge-icon">{{ section.settings.trust_badge_3_icon }}</span>
+            <div>{{ section.settings.trust_badge_3_text }}</div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    `;
+  }
+
+  function renderEmptyCart() {
+    const cartContent = document.getElementById('cart-content');
+    cartContent.innerHTML = `
+      <div class="empty-cart">
+        <div class="empty-cart-icon">{{ section.settings.empty_cart_icon }}</div>
+        <h2>{{ section.settings.empty_cart_title }}</h2>
+        <p>{{ section.settings.empty_cart_text }}</p>
+        <a href="{{ section.settings.continue_shopping_url }}" class="checkout-btn" style="display: inline-block; text-decoration: none;">
+          {{ section.settings.continue_shopping_text }}
+        </a>
+      </div>
+    `;
+  }
+
+  async function updateQuantity(key, quantity) {
+    quantity = parseInt(quantity);
+    if (quantity < 0) quantity = 0;
+
+    try {
+      const response = await fetch('/cart/change.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: key,
+          quantity: quantity
+        })
+      });
+
+      cartData = await response.json();
+      renderCart();
+    } catch (error) {
+      console.error('Update error:', error);
+      loadCart();
+    }
+  }
+
+  function goToCheckout() {
+    window.location.href = '/checkout';
+  }
+
+  function formatMoney(cents) {
+    return (cents / 100).toLocaleString('tr-TR', {
+      style: 'currency',
+      currency: 'TRY'
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Özel Sepet Sayfası",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Genel Ayarlar"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Ana Renk",
+      "default": "#2c3e50"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "İkincil Renk",
+      "default": "#3498db"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Vurgu Rengi",
+      "default": "#e74c3c"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Arkaplan Rengi",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Metin Rengi",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Köşe Yuvarlaklığı",
+      "default": 8
+    },
+    {
+      "type": "font_picker",
+      "id": "font_family",
+      "label": "Font Ailesi",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "header",
+      "content": "Başlık Ayarları"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Başlığı Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "header_title",
+      "label": "Başlık Metni",
+      "default": "Sepetim"
+    },
+    {
+      "type": "text",
+      "id": "header_subtitle",
+      "label": "Alt Başlık",
+      "default": "Alışveriş sepetinizi gözden geçirin"
+    },
+    {
+      "type": "header",
+      "content": "İçerik Ayarları"
+    },
+    {
+      "type": "text",
+      "id": "items_title",
+      "label": "Ürünler Başlığı",
+      "default": "Ürünlerim"
+    },
+    {
+      "type": "text",
+      "id": "summary_title",
+      "label": "Özet Başlığı",
+      "default": "Sipariş Özeti"
+    },
+    {
+      "type": "text",
+      "id": "checkout_button_text",
+      "label": "Ödeme Butonu Metni",
+      "default": "Güvenli Ödeme"
+    },
+    {
+      "type": "header",
+      "content": "Kargo Ayarları"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping",
+      "label": "Kargo Bilgisini Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": "Kargo Metni",
+      "default": "Ücretsiz"
+    },
+    {
+      "type": "header",
+      "content": "Güven Rozetleri"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Güven Rozetlerini Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_1_icon",
+      "label": "Rozet 1 İkon",
+      "default": "🔒"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_1_text",
+      "label": "Rozet 1 Metin",
+      "default": "Güvenli Ödeme"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_2_icon",
+      "label": "Rozet 2 İkon",
+      "default": "🚚"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_2_text",
+      "label": "Rozet 2 Metin",
+      "default": "Ücretsiz Kargo"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_3_icon",
+      "label": "Rozet 3 İkon",
+      "default": "↩️"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_3_text",
+      "label": "Rozet 3 Metin",
+      "default": "Kolay İade"
+    },
+    {
+      "type": "header",
+      "content": "Boş Sepet Ayarları"
+    },
+    {
+      "type": "text",
+      "id": "empty_cart_icon",
+      "label": "Boş Sepet İkonu",
+      "default": "🛒"
+    },
+    {
+      "type": "text",
+      "id": "empty_cart_title",
+      "label": "Boş Sepet Başlığı",
+      "default": "Sepetiniz Boş"
+    },
+    {
+      "type": "textarea",
+      "id": "empty_cart_text",
+      "label": "Boş Sepet Metni",
+      "default": "Henüz sepetinize ürün eklemediniz. Alışverişe başlamak için aşağıdaki butona tıklayın."
+    },
+    {
+      "type": "url",
+      "id": "continue_shopping_url",
+      "label": "Alışverişe Devam Linki",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "continue_shopping_text",
+      "label": "Alışverişe Devam Butonu",
+      "default": "Alışverişe Başla"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Özel Sepet Sayfası"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,105 @@
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>{{ section.settings.footer_title | default: 'Ful Beauty' }}</h3>
+            <p>{{ section.settings.footer_description | default: 'Premium cilt bakım ürünleri ile güzelliğinizi keşfedin.' }}</p>
+            {% if section.settings.show_social_links %}
+                <div class="social-links">
+                    {% if section.settings.facebook_url != blank %}
+                        <a href="{{ section.settings.facebook_url }}">📘</a>
+                    {% endif %}
+                    {% if section.settings.instagram_url != blank %}
+                        <a href="{{ section.settings.instagram_url }}">📷</a>
+                    {% endif %}
+                    {% if section.settings.twitter_url != blank %}
+                        <a href="{{ section.settings.twitter_url }}">🐦</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="footer-section">
+            <h3>Hızlı Linkler</h3>
+            {% for link in linklists[section.settings.footer_menu].links %}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endfor %}
+        </div>
+        
+        <div class="footer-section">
+            <h3>İletişim</h3>
+            <p>📧 {{ section.settings.contact_email | default: 'info@fulbeauty.com' }}</p>
+            <p>📞 {{ section.settings.contact_phone | default: '0850 123 45 67' }}</p>
+            <p>📍 {{ section.settings.contact_address | default: 'İstanbul, Türkiye' }}</p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Tüm hakları saklıdır.</p>
+    </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "footer_title",
+      "label": "Footer Title",
+      "default": "Ful Beauty"
+    },
+    {
+      "type": "textarea",
+      "id": "footer_description",
+      "label": "Footer Description",
+      "default": "Premium cilt bakım ürünleri ile güzelliğinizi keşfedin."
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Footer Menu",
+      "default": "footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_links",
+      "label": "Show Social Links",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact Email",
+      "default": "info@fulbeauty.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Contact Phone",
+      "default": "0850 123 45 67"
+    },
+    {
+      "type": "text",
+      "id": "contact_address",
+      "label": "Contact Address",
+      "default": "İstanbul, Türkiye"
+    }
+  ]
+}
+  
+{% endschema %}

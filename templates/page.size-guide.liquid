@@ -1,0 +1,490 @@
+{% comment %}
+  Ürün Rehberi Sayfası - FulBeauty
+  Boyut rehberi, teknik özellikler ve kullanım kılavuzu
+{% endcomment %}
+
+<div class="page-template fade-in">
+  <div class="page-header">
+    <div class="container">
+      <h1>{{ page.title | default: 'Ürün Rehberi' }}</h1>
+      <p>Silikon Yüz Temizleme Fırçanız hakkında bilmeniz gerekenler</p>
+    </div>
+  </div>
+  
+  <div class="page-content">
+    <div class="container">
+      
+      {% if page.content != blank %}
+        <div class="content-section">
+          {{ page.content }}
+        </div>
+      {% else %}
+        <div class="content-section">
+          <h2>Ürün Özellikleri</h2>
+          <div class="highlight-box">
+            <p><strong>FulBeauty Silikon Yüz Temizleme Fırçası</strong>, hassas ciltler için özel olarak tasarlanmış 2'si 1 arada yenilikçi cilt bakım ürünüdür.</p>
+          </div>
+        </div>
+      {% endif %}
+      
+      <!-- Tab Navigation -->
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('specifications')">📋 Teknik Özellikler</div>
+        <div class="tab" onclick="showTab('compatibility')">🧴 Cilt Uyumluluğu</div>
+        <div class="tab" onclick="showTab('usage')">💡 Kullanım Rehberi</div>
+        <div class="tab" onclick="showTab('care')">🧽 Bakım Talimatları</div>
+      </div>
+      
+      <!-- Tab Contents -->
+      
+      <!-- Teknik Özellikler Tab -->
+      <div class="tab-content active" id="specifications">
+        <div class="content-section">
+          <h2>Teknik Özellikler</h2>
+          <table class="info-table">
+            <thead>
+              <tr>
+                <th>Özellik</th>
+                <th>Detay</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Malzeme</strong></td>
+                <td>Medikal grade silikon (BPA-free)</td>
+              </tr>
+              <tr>
+                <td><strong>Boyutlar</strong></td>
+                <td>8 cm x 6 cm x 2 cm</td>
+              </tr>
+              <tr>
+                <td><strong>Ağırlık</strong></td>
+                <td>45 gram</td>
+              </tr>
+              <tr>
+                <td><strong>Renk Seçenekleri</strong></td>
+                <td>Pembe, Yeşil, Beyaz, Siyah</td>
+              </tr>
+              <tr>
+                <td><strong>Kullanım Ömrü</strong></td>
+                <td>6-12 ay (kullanım sıklığına göre)</td>
+              </tr>
+              <tr>
+                <td><strong>Su Geçirmezlik</strong></td>
+                <td>%100 Su geçirmez (IPX7)</td>
+              </tr>
+              <tr>
+                <td><strong>Sertifikalar</strong></td>
+                <td>CE, FDA, Dermatoloji Onayı</td>
+              </tr>
+              <tr>
+                <td><strong>Garantı</strong></td>
+                <td>2 yıl üretici garantisi</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="content-section">
+          <h2>Ürün Boyutları</h2>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>📏 Ergonomik Tasarım</h3>
+              <p><strong>8 cm x 6 cm</strong> boyutları ile tüm el büyüklüklerine uyum sağlar. Kaymaz tutma yüzeyi güvenli kullanım sunar.</p>
+            </div>
+            <div class="feature-card">
+              <h3>⚖️ Hafif Yapı</h3>
+              <p><strong>45 gram</strong> ağırlığı ile uzun kullanımda yorulmaz. Seyahat çantasında yer kaplamaz.</p>
+            </div>
+            <div class="feature-card">
+              <h3>💧 Su Geçirmez</h3>
+              <p><strong>IPX7 sertifikası</strong> ile duş sırasında da güvenle kullanabilirsiniz.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Cilt Uyumluluğu Tab -->
+      <div class="tab-content" id="compatibility">
+        <div class="content-section">
+          <h2>Hangi Cilt Tipi İçin Uygun?</h2>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>🌸 Hassas Cilt</h3>
+              <p><strong>Özellikle Uygun</strong></p>
+              <ul>
+                <li>Yumuşak silikon yapı</li>
+                <li>Hipoalerjenik test edilmiş</li>
+                <li>Kimyasal içermez</li>
+                <li>Dermatoloji onaylı</li>
+              </ul>
+              <p><strong>Kullanım:</strong> Günde 1 kez, nazik hareketlerle</p>
+            </div>
+            <div class="feature-card">
+              <h3>💧 Karma Cilt</h3>
+              <p><strong>Mükemmel Uyum</strong></p>
+              <ul>
+                <li>T-bölgede derin temizlik</li>
+                <li>Yanaklarda nazik bakım</li>
+                <li>Gözenek dengeleyici</li>
+                <li>Sebum kontrolü</li>
+              </ul>
+              <p><strong>Kullanım:</strong> Günde 2 kez, bölgesel farklı basınç</p>
+            </div>
+            <div class="feature-card">
+              <h3>🌟 Yaşlanan Cilt</h3>
+              <p><strong>Anti-Aging Etkili</strong></p>
+              <ul>
+                <li>Mikro masaj etkisi</li>
+                <li>Kan dolaşımı artırır</li>
+                <li>Cilt elastikiyeti destekler</li>
+                <li>Çizgi görünümü azaltır</li>
+              </ul>
+              <p><strong>Kullanım:</strong> Günde 2 kez, dairesel masaj</p>
+            </div>
+            <div class="feature-card">
+              <h3>⚡ Yağlı Cilt</h3>
+              <p><strong>Derin Temizlik</strong></p>
+              <ul>
+                <li>Gözenek derinlemesine temizlik</li>
+                <li>Siyah nokta azaltır</li>
+                <li>Sebum dengeleyici</li>
+                <li>Akne önleyici</li>
+              </ul>
+              <p><strong>Kullanım:</strong> Günde 2-3 kez, problemli bölgelerde</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="content-section">
+          <h2>Yaş Gruplarına Göre Kullanım</h2>
+          <table class="info-table">
+            <thead>
+              <tr>
+                <th>Yaş Grubu</th>
+                <th>Kullanım Sıklığı</th>
+                <th>Özel Notlar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>16-25 Yaş</strong></td>
+                <td>Günde 2 kez</td>
+                <td>Akne ve siyah nokta odaklı kullanım</td>
+              </tr>
+              <tr>
+                <td><strong>25-35 Yaş</strong></td>
+                <td>Günde 2 kez</td>
+                <td>Önleyici bakım ve gözenek temizliği</td>
+              </tr>
+              <tr>
+                <td><strong>35-50 Yaş</strong></td>
+                <td>Günde 2 kez</td>
+                <td>Anti-aging etkisi için masaj odaklı</td>
+              </tr>
+              <tr>
+                <td><strong>50+ Yaş</strong></td>
+                <td>Günde 1-2 kez</td>
+                <td>Nazik kullanım, kan dolaşımı artırıcı</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Kullanım Rehberi Tab -->
+      <div class="tab-content" id="usage">
+        <div class="content-section">
+          <h2>Adım Adım Kullanım Rehberi</h2>
+          
+          <div class="highlight-box">
+            <h3>🚿 Günlük Temizlik Rutini (2-3 dakika)</h3>
+            
+            <p><strong>1. HAZIRLIK (30 saniye)</strong></p>
+            <ul>
+              <li>Ellerinizi temizleyin</li>
+              <li>Yüzünüzü ılık suyla ıslatın</li>
+              <li>Fırçayı ılık suyla durulayın</li>
+              <li>Temizleme jelinizi fırçaya uygulayın (bezelye büyüklüğünde)</li>
+            </ul>
+            
+            <p><strong>2. TEMİZLİK (90-120 saniye)</strong></p>
+            <ul>
+              <li><strong>Yumuşak taraf:</strong> Alın, yanaklar, çene - nazik dairesel hareketler</li>
+              <li><strong>Dokulu taraf:</strong> T-bölgesi, burun kenarları - hafif basınçla</li>
+              <li><strong>Hareket yönü:</strong> Aşağıdan yukarıya, merkezden dışarıya</li>
+              <li><strong>Her bölgeye:</strong> 10-15 saniye ayırın</li>
+            </ul>
+            
+            <p><strong>3. DURULAMA (30 saniye)</strong></p>
+            <ul>
+              <li>Yüzünüzü bol ılık suyla durulayın</li>
+              <li>Fırçayı da iyice temizleyin</li>
+              <li>Yüzünüzü yumuşak havluyla kurutun</li>
+              <li>Fırçayı havalandırın</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="content-section">
+          <h2>Özel Kullanım Teknikleri</h2>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>🎯 Problemli Bölgeler İçin</h3>
+              <ul>
+                <li><strong>Siyah noktalar:</strong> Dokulu tarafla nazik dairesel hareket</li>
+                <li><strong>Gözenekler:</strong> Yukarı doğru hafif masaj</li>
+                <li><strong>Ölü deri:</strong> Haftalık 1 kez daha uzun kullanım</li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <h3>💆 Masaj Tekniği</h3>
+              <ul>
+                <li><strong>Kan dolaşımı:</strong> Dairesel yukarı hareketler</li>
+                <li><strong>Lenfatik:</strong> Çeneden kulağa doğru</li>
+                <li><strong>Gerginlik:</strong> Alında yatay hareketler</li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <h3>⏰ Zamanlama İpuçları</h3>
+              <ul>
+                <li><strong>Sabah:</strong> Canlandırıcı etkisi için</li>
+                <li><strong>Akşam:</strong> Günün kirinden arındırma</li>
+                <li><strong>Egzersiz sonrası:</strong> Ter ve kir temizliği</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bakım Talimatları Tab -->
+      <div class="tab-content" id="care">
+        <div class="content-section">
+          <h2>Bakım ve Temizlik Talimatları</h2>
+          
+          <div class="highlight-box">
+            <h3>🧼 Günlük Bakım</h3>
+            <ul>
+              <li>Her kullanımdan sonra ılık suyla iyice durulayın</li>
+              <li>Fazla suyu silkeleyerek atmayın</li>
+              <li>Havadar bir yerde kurutun</li>
+              <li>Direkt güneş ışığından koruyun</li>
+              <li>Islak ortamda saklamayın</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="content-section">
+          <h2>Derin Temizlik (Haftada 1 kez)</h2>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>🧴 Antibakteriyel Temizlik</h3>
+              <ul>
+                <li>Antibakteriyel sıvı sabun kullanın</li>
+                <li>30 saniye nazikçe masaj yapın</li>
+                <li>Bol suyla durulayın</li>
+                <li>Tamamen kurumasını bekleyin</li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <h3>🔬 Sterilizasyon</h3>
+              <ul>
+                <li>Kaynar suya 30 saniye batırın</li>
+                <li>Veya %70 alkol ile silin</li>
+                <li>UV sterilizatör kullanabilirsiniz</li>
+                <li>Mikrodalga kullanmayın!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="content-section">
+          <h2>⚠️ Önemli Uyarılar</h2>
+          <div class="highlight-box">
+            <p><strong>YAPMAYIN:</strong></p>
+            <ul>
+              <li>❌ 60°C'den sıcak suyla yıkamayın</li>
+              <li>❌ Aşındırıcı kimyasallar kullanmayın</li>
+              <li>❌ Mikrodalga fırında sterilize etmeyin</li>
+              <li>❌ Keskin objelerle temizlemeyin</li>
+              <li>❌ Çamaşır makinesinde yıkamayın</li>
+            </ul>
+            
+            <p><strong>YENİLEME ZAMANI:</strong></p>
+            <ul>
+              <li>🔄 Silikon yüzeyde çatlak görürseniz</li>
+              <li>🔄 Renk değişimi olursa</li>
+              <li>🔄 Koku emmeye başlarsa</li>
+              <li>🔄 6-12 ay kullanım sonrası</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Ürün Garantisi -->
+      <div class="content-section">
+        <h2>🛡️ Ürün Garantisi</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>✅ Garanti Kapsamı</h3>
+            <ul>
+              <li>2 yıl üretici garantisi</li>
+              <li>Malzeme hataları</li>
+              <li>Üretim kusurları</li>
+              <li>Erken yıpranma</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>❌ Garanti Dışı</h3>
+            <ul>
+              <li>Yanlış kullanım</li>
+              <li>Kazara zarar verme</li>
+              <li>Normal aşınma</li>
+              <li>Kimyasal hasar</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- CTA Bölümü -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="{{ routes.all_products_collection_url }}" class="cta-button">
+          Ürünü İncele
+        </a>
+        <a href="{{ pages['faq'].url | default: '/pages/faq' }}" class="cta-button secondary" style="margin-left: 1rem;">
+          Sıkça Sorulan Sorular
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</div> kez)</h2>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>🧴 Antibakteriyel Temizlik</h3>
+              <ul>
+                <li>Antibakteriyel sıvı sabun kullanın</li>
+                <li>30 saniye nazikçe masaj yapın</li>
+                <li>Bol suyla durulayın</li>
+                <li>Tamamen kurumasını bekleyin</li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <h3>🔬 Sterilizasyon</h3>
+              <ul>
+                <li>Kaynar suya 30 saniye batırın</li>
+                <li>Veya %70 alkol ile silin</li>
+                <li>UV sterilizatör kullanabilirsiniz</li>
+                <li>Mikrodalga kullanmayın!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="content-section">
+          <h2>⚠️ Önemli Uyarılar</h2>
+          <div class="highlight-box">
+            <p><strong>YAPMAYIN:</strong></p>
+            <ul>
+              <li>❌ 60°C'den sıcak suyla yıkamayın</li>
+              <li>❌ Aşındırıcı kimyasallar kullanmayın</li>
+              <li>❌ Mikrodalga fırında sterilize etmeyin</li>
+              <li>❌ Keskin objelerle temizlemeyin</li>
+              <li>❌ Çamaşır makinesinde yıkamayın</li>
+            </ul>
+            
+            <p><strong>YENİLEME ZAMANI:</strong></p>
+            <ul>
+              <li>🔄 Silikon yüzeyde çatlak görürseniz</li>
+              <li>🔄 Renk değişimi olursa</li>
+              <li>🔄 Koku emmeye başlarsa</li>
+              <li>🔄 6-12 ay kullanım sonrası</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Ürün Garantisi -->
+      <div class="content-section">
+        <h2>🛡️ Ürün Garantisi</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>✅ Garanti Kapsamı</h3>
+            <ul>
+              <li>2 yıl üretici garantisi</li>
+              <li>Malzeme hataları</li>
+              <li>Üretim kusurları</li>
+              <li>Erken yıpranma</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>❌ Garanti Dışı</h3>
+            <ul>
+              <li>Yanlış kullanım</li>
+              <li>Kazara zarar verme</li>
+              <li>Normal aşınma</li>
+              <li>Kimyasal hasar</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- CTA Bölümü -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="{{ routes.all_products_collection_url }}" class="cta-button">
+          Ürünü İncele
+        </a>
+        <a href="{{ pages['faq'].url | default: '/pages/faq' }}" class="cta-button secondary" style="margin-left: 1rem;">
+          Sıkça Sorulan Sorular
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Tab functionality
+  window.showTab = function(tabName) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active');
+    });
+    
+    // Remove active class from all tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    
+    // Show selected tab content
+    document.getElementById(tabName).classList.add('active');
+    
+    // Add active class to clicked tab
+    event.target.classList.add('active');
+    
+    // Track tab interactions
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'product_guide_tab', {
+        'event_category': 'engagement',
+        'event_label': tabName,
+        'value': 1
+      });
+    }
+  };
+  
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+});
+</script>

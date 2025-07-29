@@ -1,0 +1,358 @@
+{% schema %}
+{
+  "name": "Müşteri Yorumları",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Genel Ayarlar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Başlık Bölümünü Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Ana Başlık",
+      "default": "💕 Müşterilerimiz Ne Diyor?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Alt Başlık",
+      "default": "Binlerce memnun müşterimizin deneyimlerini keşfedin"
+    },
+    {
+      "type": "header",
+      "content": "İstatistikler"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "İstatistikleri Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "total_reviews",
+      "label": "Toplam Yorum Sayısı",
+      "default": "2,847"
+    },
+    {
+      "type": "text",
+      "id": "average_rating",
+      "label": "Ortalama Puan",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "satisfaction_rate",
+      "label": "Memnuniyet Oranı",
+      "default": "%98"
+    },
+    {
+      "type": "header",
+      "content": "Güven Göstergeleri"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_indicators",
+      "label": "Güven Göstergelerini Göster",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Sosyal Medya Yorumları"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_reviews",
+      "label": "Sosyal Medya Yorumlarını Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "social_title",
+      "label": "Sosyal Medya Başlığı",
+      "default": "📱 Sosyal Medyada Biz"
+    },
+    {
+      "type": "header",
+      "content": "Call-to-Action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "CTA Bölümünü Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA Başlığı",
+      "default": "Siz de Aramıza Katılın!"
+    },
+    {
+      "type": "text",
+      "id": "cta_subtitle",
+      "label": "CTA Alt Başlığı",
+      "default": "Binlerce memnun müşterimizin arasına katılın."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Buton Metni",
+      "default": "Hemen Sipariş Ver"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Linki"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Müşteri Yorumu",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Yıldız Sayısı",
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stars",
+          "label": "Yıldızları Göster",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "testimonial_text",
+          "label": "Yorum Metni",
+          "default": "Bu fırça gerçekten harika! Cildim hiç bu kadar temiz ve yumuşak olmamıştı."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Müşteri Adı",
+          "default": "Ayşe K."
+        },
+        {
+          "type": "image_picker",
+          "id": "author_photo",
+          "label": "Müşteri Fotoğrafı"
+        },
+        {
+          "type": "text",
+          "id": "author_location",
+          "label": "Şehir",
+          "default": "İstanbul"
+        },
+        {
+          "type": "text",
+          "id": "purchase_date",
+          "label": "Satın Alma Tarihi",
+          "default": "2 hafta önce"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Doğrulanmış Alıcı",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_info",
+          "label": "Ürün Bilgilerini Göster",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "product_variant",
+          "label": "Ürün Varyantı",
+          "default": "Pembe Renk"
+        },
+        {
+          "type": "text",
+          "id": "usage_duration",
+          "label": "Kullanım Süresi",
+          "default": "2 hafta"
+        },
+        {
+          "type": "checkbox",
+          "id": "before_after_photos",
+          "label": "Önce/Sonra Fotoğrafları Göster",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "before_photo",
+          "label": "Öncesi Fotoğrafı"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_photo",
+          "label": "Sonrası Fotoğrafı"
+        }
+      ]
+    },
+    {
+      "type": "featured_review",
+      "name": "Öne Çıkan Yorum",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Rozet Metni",
+          "default": "🏆 Öne Çıkan Yorum"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Yıldız Sayısı",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "testimonial_text",
+          "label": "Ana Yorum",
+          "default": "2 yıldır cilt sorunlarıyla uğraşıyordum. Bu fırça sayesinde cildim tamamen değişti!"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Müşteri Adı",
+          "default": "Dr. Zeynep Aktaş"
+        },
+        {
+          "type": "text",
+          "id": "author_title",
+          "label": "Müşteri Unvanı",
+          "default": "Dermatoloji Uzmanı"
+        },
+        {
+          "type": "textarea",
+          "id": "detailed_review",
+          "label": "Detaylı Yorum",
+          "default": "Profesyonel olarak da tavsiye ettiğim bu ürün, hastalarımda çok olumlu sonuçlar verdi..."
+        },
+        {
+          "type": "url",
+          "id": "video_testimonial",
+          "label": "Video Testimonial URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_poster",
+          "label": "Video Önizleme Görseli"
+        }
+      ]
+    },
+    {
+      "type": "social_review",
+      "name": "Sosyal Medya Yorumu",
+      "settings": [
+        {
+          "type": "select",
+          "id": "platform_name",
+          "label": "Platform",
+          "options": [
+            {
+              "value": "Instagram",
+              "label": "Instagram"
+            },
+            {
+              "value": "TikTok",
+              "label": "TikTok"
+            },
+            {
+              "value": "Facebook",
+              "label": "Facebook"
+            },
+            {
+              "value": "YouTube",
+              "label": "YouTube"
+            }
+          ],
+          "default": "Instagram"
+        },
+        {
+          "type": "text",
+          "id": "username",
+          "label": "Kullanıcı Adı",
+          "default": "beautylover23"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Yorum Metni",
+          "default": "OMG bu fırça incredible! 🤩 #FulBeauty #skincare"
+        },
+        {
+          "type": "image_picker",
+          "id": "post_screenshot",
+          "label": "Post Ekran Görüntüsü"
+        },
+        {
+          "type": "image_picker",
+          "id": "platform_logo",
+          "label": "Platform Logosu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Müşteri Yorumları",
+      "category": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Bu fırça gerçekten harika! Cildim hiç bu kadar temiz ve yumuşak olmamıştı. 2 haftada gözeneklerim küçüldü!",
+            "author_name": "Ayşe K.",
+            "author_location": "İstanbul",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Hassas cildim var ama hiç tahrişe neden olmadı. Çok nazik ama etkili. Kesinlikle tavsiye ederim!",
+            "author_name": "Merve S.",
+            "author_location": "Ankara",
+            "rating": 5
+          }
+        },
+        {
+          "type": "featured_review",
+          "settings": {
+            "testimonial_text": "Dermatoloji uzmanı olarak hastalarıma da öneriyorum. Klinik testlerden geçmiş olması çok önemli.",
+            "author_name": "Dr. Zeynep Aktaş",
+            "author_title": "Dermatoloji Uzmanı"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "3. haftamda siyah noktalarım neredeyse tamamen geçti. Pahalı kliniklere gitmeye gerek kalmadı!",
+            "author_name": "Selin D.",
+            "author_location": "İzmir",
+            "rating": 5
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

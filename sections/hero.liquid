@@ -1,0 +1,66 @@
+<section id="home" class="hero fade-in">
+    <div class="hero-content">
+        {% if section.settings.hero_badge_text != blank %}
+            <div class="hero-badge">{{ section.settings.hero_badge_text }}</div>
+        {% endif %}
+        
+        <h1 class="heading-primary">
+            {{ section.settings.hero_title | replace: '[highlight]', '<span class="highlight">' | replace: '[/highlight]', '</span>' | default: '<span class="highlight">Dermatoloji Uzmanı Onaylı</span><br>Premium Silikon Cilt Temizleme Fırçası' }}
+        </h1>
+        
+        <p>{{ section.settings.hero_description | default: 'Cilt tipinize özel analiz ile eşleştirilen, klinik testlerden geçmiş premium silikon fırçalar.' }}</p>
+        
+        <div class="hero-cta-container">
+            <a href="{{ section.settings.cta_url | default: '#products' }}" class="cta-button">
+                {{ section.settings.cta_text | default: 'Hemen Keşfet' }}
+            </a>
+            <div class="guarantee-text">
+                🛡️ {{ section.settings.guarantee_text | default: '30 Gün Sonuç Garantisi' }}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_badge_text",
+      "label": "Hero Badge Text",
+      "default": "✨ Premium Cilt Bakım Deneyimi"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "[highlight]Dermatoloji Uzmanı Onaylı[/highlight]<br>Premium Silikon Cilt Temizleme Fırçası"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Hero Description",
+      "default": "Cilt tipinize özel analiz ile eşleştirilen, klinik testlerden geçmiş premium silikon fırçalar."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Hemen Keşfet"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Button URL"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee Text",
+      "default": "30 Gün Sonuç Garantisi"
+    }
+  ],
+  "presets": [{"name": "Hero"}]
+}
+{% endschema %}

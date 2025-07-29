@@ -1,0 +1,1230 @@
+<!-- sections/social-proof.liquid -->
+<section class="social-proof-section">
+  <div class="container">
+    
+    <!-- Başlık -->
+    <div class="social-proof-header">
+      <h2>{{ section.settings.title | default: '📱 Sosyal Medyada Binlerce Mutlu Müşteri' }}</h2>
+      {% if section.settings.subtitle != blank %}
+      <p class="social-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Sosyal Medya İstatistikleri -->
+    {% if section.settings.show_stats %}
+    <div class="social-stats">
+      <div class="stat-card">
+        <div class="stat-icon">📷</div>
+        <div class="stat-number">{{ section.settings.instagram_followers | default: '45K' }}</div>
+        <div class="stat-label">Instagram Takipçi</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎵</div>
+        <div class="stat-number">{{ section.settings.tiktok_followers | default: '128K' }}</div>
+        <div class="stat-label">TikTok Takipçi</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💬</div>
+        <div class="stat-number">{{ section.settings.daily_mentions | default: '850+' }}</div>
+        <div class="stat-label">Günlük Bahsedilme</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-number">{{ section.settings.rating_average | default: '4.9' }}</div>
+        <div class="stat-label">Ortalama Puan</div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Sosyal Medya Postları -->
+    <div class="social-posts-grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'social_post' %}
+            <div class="social-post-card" data-platform="{{ block.settings.platform }}" {{ block.shopify_attributes }}>
+              
+              <!-- Platform Header -->
+              <div class="post-header">
+                <div class="platform-info">
+                  <div class="platform-icon">
+                    {% case block.settings.platform %}
+                      {% when 'instagram' %}📷
+                      {% when 'tiktok' %}🎵
+                      {% when 'facebook' %}📘
+                      {% when 'twitter' %}🐦
+                      {% when 'youtube' %}📺
+                      {% else %}📱
+                    {% endcase %}
+                  </div>
+                  <div class="user-info">
+                    <div class="username">@{{ block.settings.username | default: 'kullanici' }}</div>
+                    <div class="platform-name">{{ block.settings.platform | capitalize }}</div>
+                  </div>
+                </div>
+                
+                {% if block.settings.verified %}
+                <div class="verified-badge">✅</div>
+                {% endif %}
+              </div>
+
+              <!-- Post İçeriği -->
+              <div class="post-content">
+                {% if block.settings.post_image != blank %}
+                <div class="post-image">
+                  <img src="{{ block.settings.post_image | img_url: '300x300' }}" 
+                       alt="{{ block.settings.post_text | truncatewords: 5 }}"
+                       loading="lazy">
+                  
+                  {% if block.settings.is_video %}
+                  <div class="video-overlay">
+                    <div class="play-button">▶️</div>
+                  </div>
+                  {% endif %}
+                </div>
+                {% endif %}
+                
+                {% if block.settings.post_text != blank %}
+                <div class="post-text">
+                  {{ block.settings.post_text | newline_to_br }}
+                </div>
+                {% endif %}
+              </div>
+
+              <!-- Post Metrikleri -->
+              {% if block.settings.show_metrics %}
+              <div class="post-metrics">
+                {% if block.settings.likes_count != blank %}
+                <div class="metric">
+                  <span class="metric-icon">❤️</span>
+                  <span class="metric-count">{{ block.settings.likes_count }}</span>
+                </div>
+                {% endif %}
+                
+                {% if block.settings.comments_count != blank %}
+                <div class="metric">
+                  <span class="metric-icon">💬</span>
+                  <span class="metric-count">{{ block.settings.comments_count }}</span>
+                </div>
+                {% endif %}
+                
+                {% if block.settings.shares_count != blank %}
+                <div class="metric">
+                  <span class="metric-icon">🔄</span>
+                  <span class="metric-count">{{ block.settings.shares_count }}</span>
+                </div>
+                {% endif %}
+              </div>
+              {% endif %}
+
+              <!-- Post Tarihi -->
+              {% if block.settings.post_date != blank %}
+              <div class="post-date">
+                {{ block.settings.post_date }}
+              </div>
+              {% endif %}
+            </div>
+
+          {% when 'ugc_showcase' %}
+            <div class="ugc-showcase-card" {{ block.shopify_attributes }}>
+              <div class="ugc-badge">👥 {{ block.settings.badge_text | default: 'Müşteri Paylaşımı' }}</div>
+              
+              {% if block.settings.ugc_image != blank %}
+              <div class="ugc-image">
+                <img src="{{ block.settings.ugc_image | img_url: '300x300' }}" 
+                     alt="Müşteri paylaşımı"
+                     loading="lazy">
+              </div>
+              {% endif %}
+              
+              <div class="ugc-content">
+                {% if block.settings.ugc_text != blank %}
+                <p class="ugc-text">"{{ block.settings.ugc_text }}"</p>
+                {% endif %}
+                
+                <div class="ugc-author">
+                  <strong>{{ block.settings.customer_name | default: 'Müşterimiz' }}</strong>
+                  {% if block.settings.customer_location != blank %}
+                  <span class="location">📍 {{ block.settings.customer_location }}</span>
+                  {% endif %}
+                </div>
+                
+                {% if block.settings.product_tag != blank %}
+                <div class="product-tag">#{{ block.settings.product_tag }}</div>
+                {% endif %}
+              </div>
+            </div>
+
+          {% when 'influencer_post' %}
+            <div class="influencer-post-card" {{ block.shopify_attributes }}>
+              <div class="influencer-badge">⭐ {{ block.settings.badge_text | default: 'Influencer Tavsiyesi' }}</div>
+              
+              <div class="influencer-header">
+                {% if block.settings.influencer_photo != blank %}
+                <div class="influencer-photo">
+                  <img src="{{ block.settings.influencer_photo | img_url: '60x60' }}" 
+                       alt="{{ block.settings.influencer_name }}"
+                       loading="lazy">
+                </div>
+                {% endif %}
+                
+                <div class="influencer-info">
+                  <div class="influencer-name">{{ block.settings.influencer_name | default: 'Beauty Influencer' }}</div>
+                  <div class="follower-count">{{ block.settings.follower_count | default: '50K' }} takipçi</div>
+                </div>
+              </div>
+              
+              {% if block.settings.influencer_quote != blank %}
+              <blockquote class="influencer-quote">
+                "{{ block.settings.influencer_quote }}"
+              </blockquote>
+              {% endif %}
+              
+              {% if block.settings.collaboration_type != blank %}
+              <div class="collaboration-tag">{{ block.settings.collaboration_type }}</div>
+              {% endif %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    <!-- Hashtag Showcase -->
+    {% if section.settings.show_hashtags %}
+    <div class="hashtag-showcase">
+      <h3>{{ section.settings.hashtag_title | default: '🏷️ Bizi Etiketleyin!' }}</h3>
+      <div class="hashtag-grid">
+        {% assign hashtags = section.settings.hashtags | split: ',' %}
+        {% for hashtag in hashtags %}
+          {% unless hashtag == blank %}
+          <div class="hashtag-item">
+            <span class="hashtag">#{{ hashtag | strip }}</span>
+            <span class="hashtag-count">{{ forloop.index | times: 234 }}+ post</span>
+          </div>
+          {% endunless %}
+        {% endfor %}
+      </div>
+      
+      <p class="hashtag-cta">
+        Ürünümüzü kullanırken <strong>#FulBeauty</strong> hashtag'ini kullanın, 
+        paylaşımınızı burada görebilirsiniz! 📸
+      </p>
+    </div>
+    {% endif %}
+
+    <!-- Live Activity Feed -->
+    {% if section.settings.show_live_feed %}
+    <div class="live-activity-feed">
+      <h3>{{ section.settings.live_feed_title | default: '🔴 Canlı Aktivite' }}</h3>
+      <div class="activity-items">
+        <div class="activity-item">
+          <span class="activity-icon">🛒</span>
+          <span class="activity-text"><strong>Zeynep K.</strong> az önce sipariş verdi</span>
+          <span class="activity-time">2 dk önce</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-icon">⭐</span>
+          <span class="activity-text"><strong>Ayşe M.</strong> 5 yıldız verdi</span>
+          <span class="activity-time">5 dk önce</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-icon">📷</span>
+          <span class="activity-text"><strong>@beautygirl23</strong> Instagram'da paylaştı</span>
+          <span class="activity-time">12 dk önce</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-icon">💬</span>
+          <span class="activity-text"><strong>Merve S.</strong> yorum yaptı</span>
+          <span class="activity-time">18 dk önce</span>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Call-to-Action -->
+    {% if section.settings.show_cta %}
+    <div class="social-cta">
+      <h3>{{ section.settings.cta_title | default: 'Siz de Paylaşın!' }}</h3>
+      <p>{{ section.settings.cta_subtitle | default: 'Deneyiminizi sosyal medyada paylaşın, toplumumuzun bir parçası olun.' }}</p>
+      
+      <div class="social-buttons">
+        {% if section.settings.instagram_url != blank %}
+        <a href="{{ section.settings.instagram_url }}" class="social-btn instagram" target="_blank">
+          📷 Instagram'da Takip Et
+        </a>
+        {% endif %}
+        
+        {% if section.settings.tiktok_url != blank %}
+        <a href="{{ section.settings.tiktok_url }}" class="social-btn tiktok" target="_blank">
+          🎵 TikTok'ta Takip Et
+        </a>
+        {% endif %}
+        
+        <a href="{{ section.settings.product_url | default: routes.all_products_collection_url }}" class="social-btn primary">
+          🛒 Hemen Sipariş Ver
+        </a>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<style>
+.social-proof-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--background-light) 0%, #F8F6F3 50%, var(--background-soft) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-proof-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(139, 111, 77, 0.03) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.social-proof-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.social-proof-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.social-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.social-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.stat-card {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(139, 111, 77, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover::before {
+  transform: scaleX(1);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  font-family: 'Playfair Display', serif;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.social-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.social-post-card,
+.ugc-showcase-card,
+.influencer-post-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(139, 111, 77, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.social-post-card:hover,
+.ugc-showcase-card:hover,
+.influencer-post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.platform-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.platform-icon {
+  font-size: 1.5rem;
+}
+
+.username {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.platform-name {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.verified-badge {
+  font-size: 1rem;
+}
+
+.post-content {
+  position: relative;
+}
+
+.post-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.post-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.post-text {
+  padding: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.post-metrics {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.metric-icon {
+  font-size: 1rem;
+}
+
+.post-date {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: var(--background-soft);
+  text-align: center;
+}
+
+/* UGC Showcase */
+.ugc-badge,
+.influencer-badge {
+  background: var(--trust-green);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 15px;
+  z-index: 10;
+}
+
+.ugc-image {
+  height: 200px;
+  overflow: hidden;
+}
+
+.ugc-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ugc-content {
+  padding: 1rem;
+}
+
+.ugc-text {
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.ugc-author {
+  margin-bottom: 0.5rem;
+}
+
+.location {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-left: 0.5rem;
+}
+
+.product-tag {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Influencer Post */
+.influencer-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  padding-top: 3rem;
+}
+
+.influencer-photo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+}
+
+.influencer-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.follower-count {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.influencer-quote {
+  padding: 0 1rem 1rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  position: relative;
+}
+
+.collaboration-tag {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Hashtag Showcase */
+.hashtag-showcase {
+  background: white;
+  padding: 3rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  margin: 3rem 0;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 2;
+}
+
+.hashtag-showcase h3 {
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.hashtag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.hashtag-item {
+  background: var(--background-soft);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.hashtag-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.hashtag {
+  display: block;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.hashtag-count {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.hashtag-cta {
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Live Activity Feed */
+.live-activity-feed {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  margin: 3rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.live-activity-feed h3 {
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.activity-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
+}
+
+.activity-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.activity-text {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.activity-time {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+/* Social CTA */
+.social-cta {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 2;
+}
+
+.social-cta h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.social-cta p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.social-btn.instagram {
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+  color: white;
+}
+
+.social-btn.tiktok {
+  background: #000;
+  color: white;
+}
+
+.social-btn.primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .social-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .social-posts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hashtag-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .social-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .activity-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Animate stats on scroll
+  const statCards = document.querySelectorAll('.stat-card');
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, index * 100);
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  });
+  
+  statCards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    statsObserver.observe(card);
+  });
+  
+  // Track social proof interactions
+  const socialSection = document.querySelector('.social-proof-section');
+  if (socialSection) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'social_proof_view', {
+              'event_category': 'engagement',
+              'event_label': 'social_proof_section',
+              'value': 1
+            });
+          }
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    });
+    
+    sectionObserver.observe(socialSection);
+  }
+  
+  // Track social button clicks
+  const socialButtons = document.querySelectorAll('.social-btn');
+  socialButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const platform = this.classList.contains('instagram') ? 'instagram' : 
+                      this.classList.contains('tiktok') ? 'tiktok' : 'primary';
+      
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'social_follow_click', {
+          'event_category': 'social',
+          'event_label': platform,
+          'value': 1
+        });
+      }
+    });
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Sosyal Medya Kanıtları",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Genel Ayarlar"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Ana Başlık",
+      "default": "📱 Sosyal Medyada Binlerce Mutlu Müşteri"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Alt Başlık",
+      "default": "Instagram, TikTok ve diğer platformlarda milyonlarca beğeni alan ürünümüz"
+    },
+    {
+      "type": "header",
+      "content": "İstatistikler"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "İstatistikleri Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "instagram_followers",
+      "label": "Instagram Takipçi Sayısı",
+      "default": "45K"
+    },
+    {
+      "type": "text",
+      "id": "tiktok_followers",
+      "label": "TikTok Takipçi Sayısı",
+      "default": "128K"
+    },
+    {
+      "type": "text",
+      "id": "daily_mentions",
+      "label": "Günlük Bahsedilme",
+      "default": "850+"
+    },
+    {
+      "type": "text",
+      "id": "rating_average",
+      "label": "Ortalama Puan",
+      "default": "4.9"
+    },
+    {
+      "type": "header",
+      "content": "Hashtag Bölümü"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hashtags",
+      "label": "Hashtag Bölümünü Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hashtag_title",
+      "label": "Hashtag Başlığı",
+      "default": "🏷️ Bizi Etiketleyin!"
+    },
+    {
+      "type": "textarea",
+      "id": "hashtags",
+      "label": "Hashtag Listesi (virgülle ayırın)",
+      "default": "FulBeauty,SkinCare,BeautyTips,CleanSkin,HealthySkin"
+    },
+    {
+      "type": "header",
+      "content": "Canlı Aktivite"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_live_feed",
+      "label": "Canlı Aktivite Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "live_feed_title",
+      "label": "Canlı Aktivite Başlığı",
+      "default": "🔴 Canlı Aktivite"
+    },
+    {
+      "type": "header",
+      "content": "Call-to-Action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "CTA Bölümünü Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA Başlığı",
+      "default": "Siz de Paylaşın!"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_subtitle",
+      "label": "CTA Alt Başlığı",
+      "default": "Deneyiminizi sosyal medyada paylaşın, toplumumuzun bir parçası olun."
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "Ürün Sayfası URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social_post",
+      "name": "Sosyal Medya Postu",
+      "settings": [
+        {
+          "type": "select",
+          "id": "platform",
+          "label": "Platform",
+          "options": [
+            {
+              "value": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "value": "tiktok",
+              "label": "TikTok"
+            },
+            {
+              "value": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "value": "twitter",
+              "label": "Twitter"
+            },
+            {
+              "value": "youtube",
+              "label": "YouTube"
+            }
+          ],
+          "default": "instagram"
+        },
+        {
+          "type": "text",
+          "id": "username",
+          "label": "Kullanıcı Adı",
+          "default": "beautylover23"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Doğrulanmış Hesap",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "post_image",
+          "label": "Post Görseli"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_video",
+          "label": "Video Postu",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "post_text",
+          "label": "Post Metni",
+          "default": "Bu fırça gerçekten harika! 😍 #FulBeauty #skincare #beautyessentials"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_metrics",
+          "label": "Metrikleri Göster",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "likes_count",
+          "label": "Beğeni Sayısı",
+          "default": "1.2K"
+        },
+        {
+          "type": "text",
+          "id": "comments_count",
+          "label": "Yorum Sayısı",
+          "default": "89"
+        },
+        {
+          "type": "text",
+          "id": "shares_count",
+          "label": "Paylaşım Sayısı",
+          "default": "156"
+        },
+        {
+          "type": "text",
+          "id": "post_date",
+          "label": "Post Tarihi",
+          "default": "2 gün önce"
+        }
+      ]
+    },
+    {
+      "type": "ugc_showcase",
+      "name": "Müşteri Paylaşımı",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Rozet Metni",
+          "default": "Müşteri Paylaşımı"
+        },
+        {
+          "type": "image_picker",
+          "id": "ugc_image",
+          "label": "Müşteri Fotoğrafı"
+        },
+        {
+          "type": "textarea",
+          "id": "ugc_text",
+          "label": "Müşteri Yorumu",
+          "default": "2 haftada cildimdeki değişim inanılmaz! Herkese tavsiye ediyorum."
+        },
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Müşteri Adı",
+          "default": "Zeynep K."
+        },
+        {
+          "type": "text",
+          "id": "customer_location",
+          "label": "Müşteri Konumu",
+          "default": "İstanbul"
+        },
+        {
+          "type": "text",
+          "id": "product_tag",
+          "label": "Ürün Etiketi",
+          "default": "FulBeauty"
+        }
+      ]
+    },
+    {
+      "type": "influencer_post",
+      "name": "Influencer Yorumu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Rozet Metni",
+          "default": "Influencer Tavsiyesi"
+        },
+        {
+          "type": "image_picker",
+          "id": "influencer_photo",
+          "label": "Influencer Fotoğrafı"
+        },
+        {
+          "type": "text",
+          "id": "influencer_name",
+          "label": "Influencer Adı",
+          "default": "Beauty Guru Elif"
+        },
+        {
+          "type": "text",
+          "id": "follower_count",
+          "label": "Takipçi Sayısı",
+          "default": "125K"
+        },
+        {
+          "type": "textarea",
+          "id": "influencer_quote",
+          "label": "Influencer Yorumu",
+          "default": "Yıllardır beauty sektöründeyim ve bu kadar etkili bir ürün görmedim. Gerçekten işe yarıyor!"
+        },
+        {
+          "type": "select",
+          "id": "collaboration_type",
+          "label": "İş Birliği Türü",
+          "options": [
+            {
+              "value": "Sponsorlu",
+              "label": "Sponsorlu İçerik"
+            },
+            {
+              "value": "Organik",
+              "label": "Organik Paylaşım"
+            },
+            {
+              "value": "Reklam",
+              "label": "Reklam"
+            }
+          ],
+          "default": "Organik"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sosyal Medya Kanıtları",
+      "category": "Social",
+      "blocks": [
+        {
+          "type": "social_post",
+          "settings": {
+            "platform": "instagram",
+            "username": "skincare_addict",
+            "post_text": "OMG bu fırça hayatımı değiştirdi! 😍✨ #FulBeauty #skincare #glowingskin",
+            "likes_count": "2.1K",
+            "comments_count": "156"
+          }
+        },
+        {
+          "type": "ugc_showcase",
+          "settings": {
+            "ugc_text": "1 ayda cildimdeki değişim inanılmaz! Artık makyaj yapmadan da kendimi güzel hissediyorum.",
+            "customer_name": "Ayşe M.",
+            "customer_location": "Ankara"
+          }
+        },
+        {
+          "type": "social_post",
+          "settings": {
+            "platform": "tiktok",
+            "username": "beautyqueen23",
+            "post_text": "Viral olan bu fırçayı denedim ve şok oldum! 🤯 #FulBeauty #skincareroutine #viral",
+            "is_video": true,
+            "likes_count": "45.2K",
+            "comments_count": "892"
+          }
+        },
+        {
+          "type": "influencer_post",
+          "settings": {
+            "influencer_name": "Beauty Guru Merve",
+            "follower_count": "89K",
+            "influencer_quote": "15 yıldır beauty sektöründeyim, bu kadar etkili bir cilt temizleme ürünü gerçekten nadir."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

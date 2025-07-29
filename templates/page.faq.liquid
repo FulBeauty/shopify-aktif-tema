@@ -1,0 +1,293 @@
+{% comment %}
+  FAQ Sayfası - FulBeauty
+  İnteraktif soru-cevap sistemi - TAM HAL
+{% endcomment %}
+
+<div class="page-template fade-in">
+  <div class="page-header">
+    <div class="container">
+      <h1>{{ page.title | default: 'Sık Sorulan Sorular' }}</h1>
+      <p>Merak ettiklerinizin yanıtları burada!</p>
+    </div>
+  </div>
+  
+  <div class="page-content">
+    <div class="container">
+      
+      <!-- Arama Kutusu -->
+      <div class="faq-search" style="margin-bottom: 2rem;">
+        <div class="form-group">
+          <input type="text" 
+                 id="faqSearch" 
+                 placeholder="Soru ara..." 
+                 style="width: 100%; max-width: 500px; margin: 0 auto; display: block;">
+        </div>
+      </div>
+      
+      <!-- Kategori Filtreleri -->
+      <div class="tabs">
+        <div class="tab active" onclick="showFaqCategory('all')">📋 Tümü</div>
+        <div class="tab" onclick="showFaqCategory('product')">🧴 Ürün Hakkında</div>
+        <div class="tab" onclick="showFaqCategory('usage')">💡 Kullanım</div>
+        <div class="tab" onclick="showFaqCategory('safety')">🛡️ Güvenlik</div>
+        <div class="tab" onclick="showFaqCategory('shipping')">🚚 Kargo & İade</div>
+      </div>
+      
+      <div class="faq-container">
+        
+        <!-- ÜRÜN BİLGİLERİ -->
+        <div class="faq-item" data-category="product">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>🏥 Dermatoloji uzmanı onaylı olması ne anlama geliyor?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>FulBeauty silikon fırçası, <strong>Dermatoloji Uzmanı Dr. Ayşe Kaya</strong> tarafından 6 aylık klinik testlerden geçirilmiş ve güvenliği onaylanmıştır.</p>
+            
+            <p><strong>Bu onay şunları garanti eder:</strong></p>
+            <ul style="list-style-type: none; padding-left: 0; margin: 10px 0;">
+              <li style="margin-bottom: 8px;">🔹 Hipoalerjenik - hassas cilt için güvenli</li>
+              <li style="margin-bottom: 8px;">🔹 CE medikal cihaz sertifikası</li>
+              <li style="margin-bottom: 8px;">🔹 Klinik testlerle kanıtlanmış etkinlik</li>
+              <li style="margin-bottom: 8px;">🔹 Dermatoloji uzmanı takibi</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="product">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>🆚 Diğer silikon fırçalardan farkı nedir?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p><strong>Piyasadaki %90 silikon fırça hiçbir dermatoloji testinden geçmemiş.</strong> Bizim farkımız:</p>
+            
+            <p><strong>✓ Çift yoğunluk silikon teknoloji:</strong> Hassas ve derin temizlik bir arada</p>
+            <p><strong>✓ Dermatoloji uzmanı onaylı:</strong> Klinik testlerden geçmiş</p>
+            <p><strong>✓ 30 gün sonuç garantisi</strong></p>
+            
+            <div style="background: rgba(255, 243, 205, 0.3); border: 1px solid #f39c12; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+              <strong>⚠️ Dikkat:</strong> Piyasadaki ucuz fırçalar CE sertifikası olmayan, test edilmemiş silikondan üretiliyor. Cilt tahrişi ve alerjik reaksiyonlara neden olabilir.
+            </div>
+          </div>
+        </div>
+
+        <!-- KULLANIM -->
+        <div class="faq-item" data-category="usage">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>📖 Nasıl kullanılır? Zorlu bir işlem mi?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p><strong>Çok basit! 3 adımda günlük 2 dakika:</strong></p>
+            
+            <p><strong>1. HAZIRLIK (30 saniye):</strong></p>
+            <ul>
+              <li>Yüzünüzü ılık suyla ıslatın</li>
+              <li>Temizleme jelinizi fırçaya uygulayın</li>
+            </ul>
+            
+            <p><strong>2. TEMİZLİK (90 saniye):</strong></p>
+            <ul>
+              <li>Yumuşak tarafla nazik dairesel hareketler</li>
+              <li>Sert tarafla problemli bölgelere derin temizlik</li>
+            </ul>
+            
+            <p><strong>3. DURULAMA (30 saniye):</strong></p>
+            <ul>
+              <li>Bol suyla durulayın</li>
+              <li>Fırçayı temizleyip kurutun</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="usage">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>⏰ Ne kadar sürede sonuç görürüm?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p><strong>Klinik testlerimizde gözlemlenen sonuçlar:</strong></p>
+            
+            <ul style="list-style: none; padding-left: 0;">
+              <li style="margin-bottom: 8px;"><strong>🚀 İlk 3 gün:</strong> Cilt yumuşaklığında artış</li>
+              <li style="margin-bottom: 8px;"><strong>📅 1. hafta:</strong> Gözenek görünümünde iyileşme</li>
+              <li style="margin-bottom: 8px;"><strong>📅 2. hafta:</strong> Cilt parlaklığında artış</li>
+              <li style="margin-bottom: 8px;"><strong>📅 3. hafta:</strong> Siyah nokta azalması</li>
+              <li style="margin-bottom: 8px;"><strong>📅 4. hafta:</strong> Genel cilt dokusunda belirgin iyileşme</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- GÜVENLİK -->
+        <div class="faq-item" data-category="safety">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>😰 Hassas cildim var, tahriş yapar mı?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p><strong>HAYIR! Tam tersine hassas cilt için özel tasarlandı.</strong></p>
+            
+            <p><strong>Hassas cilt için güvenlik özellikleri:</strong></p>
+            <ul>
+              <li>🔬 Hipoalerjenik testli</li>
+              <li>🧪 Dermatolog onaylı</li>
+              <li>🌿 Kimyasal içermez</li>
+              <li>✨ Ultra yumuşak silikon</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="safety">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>🤱 Hamilelik ve emzirme döneminde kullanılabilir mi?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p><strong>✅ EVET, güvenle kullanabilirsiniz!</strong></p>
+            
+            <p><strong>Nedenleri:</strong></p>
+            <ul>
+              <li>%100 medikal silikon malzeme</li>
+              <li>Kimyasal içermez</li>
+              <li>Sadece fiziksel temizlik yapar</li>
+              <li>Hormonal değişikliklere uygun</li>
+            </ul>
+            
+            <p><strong>🤰 Hamilelik döneminde özel faydaları:</strong></p>
+            <ul>
+              <li>Hormonal akne için güvenli çözüm</li>
+              <li>Cilt hassasiyeti artışında nazik bakım</li>
+              <li>Gebelik maskesi için önleyici bakım</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- KARGO & İADE -->
+        <div class="faq-item" data-category="shipping">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>🚚 Kargo süresi ve ücretleri nedir?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p><strong>🆓 ÜCRETSİZ KARGO:</strong> Tüm siparişlerde ücretsiz!</p>
+            
+            <p><strong>Teslimat süreleri:</strong></p>
+            <ul>
+              <li><strong>İstanbul, Ankara, İzmir:</strong> 1-2 iş günü</li>
+              <li><strong>Diğer iller:</strong> 2-3 iş günü</li>
+              <li><strong>Aynı gün teslimat:</strong> İstanbul için +25 TL (14:00'a kadar siparişlerde)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="shipping">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>🔄 İade süresi ve koşulları nelerdir?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p><strong>30 gün koşulsuz iade garantisi!</strong></p>
+            
+            <p><strong>İade koşulları:</strong></p>
+            <ul>
+              <li>✅ Ürün orijinal ambalajında olmalı</li>
+              <li>✅ Hijyen nedeniyle sadece açılmamış ürünler</li>
+              <li>✅ İade kargo ücreti bizden</li>
+              <li>✅ Para iadesi 3-5 iş günü</li>
+            </ul>
+            
+            <p><strong>İade süreci:</strong></p>
+            <ul>
+              <li>1️⃣ <a href="{{ pages['contact'].url | default: '/pages/contact' }}">İletişim sayfamızdan</a> iade talebinde bulunun</li>
+              <li>2️⃣ Size kargo kodu gönderelim</li>
+              <li>3️⃣ Ürünü kargoya verin</li>
+              <li>4️⃣ Ürün tarafımıza ulaştığında paranız iade edilir</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="usage">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>🧴 Hangi temizleme ürünleriyle kullanabilirim?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p><strong>Tüm cilt tipine uygun temizleyicilerle kullanabilirsiniz:</strong></p>
+            
+            <ul>
+              <li><strong>Yumuşak yüz temizleme jeli</strong> (günlük kullanım)</li>
+              <li><strong>Köpük temizleyici</strong> (hassas cilt için)</li>
+              <li><strong>Salisilik asitli temizleyici</strong> (yağlı cilt için)</li>
+              <li><strong>Micellar su</strong> (pratik kullanım)</li>
+            </ul>
+            
+            <div style="background: rgba(255, 243, 205, 0.3); border: 1px solid #f39c12; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+              <strong>❌ KULLANMAYIN:</strong> Granüllü peeling ürünleri, alkol bazlı tonikler, retinol içeren ürünlerle aynı anda kullanmayın.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="usage">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>🧽 Fırça nasıl temizlenir ve ne kadar dayanır?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p><strong>Günlük Temizlik:</strong></p>
+            <ul>
+              <li>Kullanımdan sonra ılık suyla durulayın</li>
+              <li>Havalandırın ve kurumaya bırakın</li>
+              <li>Direkt güneş ışığından kaçının</li>
+            </ul>
+            
+            <p><strong>Haftalık Derin Temizlik:</strong></p>
+            <ul>
+              <li>Antibakteriyel sabunla nazikçe yıkayın</li>
+              <li>Bol suyla durulayın</li>
+              <li>Tamamen kurumasını bekleyin</li>
+            </ul>
+            
+            <p><strong>Ömrü:</strong> Normal kullanımda 6-12 ay dayanır</p>
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- Bulunamadı Mesajı -->
+      <div id="noResults" style="display: none; text-align: center; padding: 3rem; color: var(--text-secondary);">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+        <h3>Aradığınız soru bulunamadı</h3>
+        <p>Başka bir arama terimi deneyin veya <a href="{{ pages['contact'].url | default: '/pages/contact' }}" style="color: var(--primary-color);">bize doğrudan ulaşın</a>.</p>
+      </div>
+      
+      <!-- Hala Soru Var mı? -->
+      <div class="highlight-box" style="text-align: center; margin-top: 3rem;">
+        <h3>Hala sorunuz mu var?</h3>
+        <p>Yukarıda bulamadığınız sorular için bizimle iletişime geçebilirsiniz.</p>
+        
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+          <a href="{{ pages['contact'].url | default: '/pages/contact' }}" class="cta-button secondary">
+            📧 E-posta Gönder
+          </a>
+          
+          {% if settings.whatsapp_number != blank %}
+          <a href="https://wa.me/{{ settings.whatsapp_number }}?text=Merhaba, FAQ'da bulamadığım bir sorum var." 
+             target="_blank" 
+             class="cta-button"
+             style="background: #25D366;">
+            💬 WhatsApp
+          </a>
+          {% endif %}
+          
+          {% if settings.contact_phone != blank %}
+          <a href="tel:{{ settings.contact_phone }}" class="cta-button secondary">
+            📞 Telefon
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO OPTIMIZED TITLE TAGS -->
+    {% if template contains 'product' %}
+        <title>{{ product.title }} | Dermatoloji Onaylı | {{ shop.name }}</title>
+    {% elsif template contains 'collection' %}
+        <title>{{ collection.title }} | Premium Cilt Bakım Ürünleri | {{ shop.name }}</title>
+    {% elsif template contains 'page' %}
+        {% case page.handle %}
+            {% when 'about' %}
+                <title>Hakkımızda | Dermatoloji Uzmanı Onaylı Cilt Bakım | {{ shop.name }}</title>
+            {% when 'contact' %}
+                <title>İletişim | Müşteri Hizmetleri 7/24 | {{ shop.name }}</title>
+            {% when 'faq' %}
+                <title>Sık Sorulan Sorular | Silikon Fırça Rehberi | {{ shop.name }}</title>
+            {% when 'privacy-policy' %}
+                <title>Gizlilik Politikası | KVKK Uyumlu | {{ shop.name }}</title>
+            {% when 'size-guide' %}
+                <title>Ürün Rehberi | Kullanım Kılavuzu | {{ shop.name }}</title>
+            {% else %}
+                <title>{{ page.title }} | {{ shop.name }}</title>
+        {% endcase %}
+    {% elsif template contains 'blog' %}
+        <title>{{ blog.title }} | Cilt Bakım İpuçları | {{ shop.name }}</title>
+    {% elsif template contains 'article' %}
+        <title>{{ article.title }} | Cilt Bakım Rehberi | {{ shop.name }}</title>
+    {% elsif template contains 'cart' %}
+        <title>Sepetim | Güvenli Ödeme | {{ shop.name }}</title>
+    {% elsif template contains '404' %}
+        <title>Sayfa Bulunamadı | {{ shop.name }}</title>
+    {% else %}
+        <title>{{ shop.name }} | Dermatologi Onaylı Silikon Yüz Temizleme Fırçası | 30 Gün Garanti</title>
+    {% endif %}
+    
+    <!-- SEO OPTIMIZED META DESCRIPTIONS -->
+    {% if template contains 'product' %}
+        <meta name="description" content="{{ product.description | strip_html | truncatewords: 25 | default: 'Dermatoloji uzmanı onaylı ' | append: product.title | append: '. Hassas ciltler için güvenli, 30 gün garanti, ücretsiz kargo. Hemen sipariş verin!' }}">
+    {% elsif template contains 'collection' %}
+        <meta name="description" content="{{ collection.description | strip_html | truncatewords: 25 | default: 'Premium cilt bakım ürünleri koleksiyonu. Dermatoloji onaylı, klinik testli ürünler. Ücretsiz kargo ve 30 gün iade garantisi.' }}">
+    {% elsif template contains 'page' %}
+        {% case page.handle %}
+            {% when 'about' %}
+                <meta name="description" content="FulBeauty hakkında bilgi alın. Dermatoloji uzmanı onaylı cilt bakım ürünleri üreticisi. CE sertifikalı, güvenilir ve etkili çözümler.">
+            {% when 'contact' %}
+                <meta name="description" content="FulBeauty müşteri hizmetleri ile iletişime geçin. 7/24 destek, WhatsApp, telefon ve e-posta ile ulaşabilirsiniz.">
+            {% when 'faq' %}
+                <meta name="description" content="Silikon yüz temizleme fırçası hakkında sık sorulan sorular. Kullanım rehberi, güvenlik bilgileri ve uzman tavsiyeleri.">
+            {% when 'privacy-policy' %}
+                <meta name="description" content="FulBeauty gizlilik politikası ve KVKK kapsamında kişisel veri koruma uygulamalarımız hakkında detaylı bilgi.">
+            {% when 'size-guide' %}
+                <meta name="description" content="Silikon yüz temizleme fırçası ürün rehberi. Teknik özellikler, kullanım kılavuzu ve bakım talimatları.">
+            {% else %}
+                <meta name="description" content="{{ page.content | strip_html | truncatewords: 25 | default: page.title | append: ' sayfası. FulBeauty premium cilt bakım ürünleri hakkında detaylı bilgi.' }}">
+        {% endcase %}
+    {% elsif template contains 'blog' %}
+        <meta name="description" content="Cilt bakım ipuçları, uzman tavsiyeleri ve beauty rehberleri. Dermatoloji uzmanlarından güncel bilgiler ve pratik çözümler.">
+    {% elsif template contains 'article' %}
+        <meta name="description" content="{{ article.excerpt | strip_html | truncatewords: 25 | default: article.title | append: '. Cilt bakım uzmanlarından pratik ipuçları ve öneriler.' }}">
+    {% elsif template contains 'cart' %}
+        <meta name="description" content="Sepetinizi gözden geçirin. Güvenli ödeme, ücretsiz kargo ve 30 gün iade garantisi ile güvenle alışveriş yapın.">
+    {% else %}
+        <meta name="description" content="Dermatoloji uzmanı onaylı FulBeauty silikon yüz temizleme fırçası. Hassas ciltler için güvenli, klinik testli. 30 gün garanti, ücretsiz kargo. Hemen sipariş verin!">
+    {% endif %}
+    
+    <!-- SEO KEYWORDS -->
+    {% if template contains 'product' %}
+        <meta name="keywords" content="silikon yüz temizleme fırçası, dermatoloji onaylı, cilt temizleme, hassas cilt, gözenek temizliği, {{ product.tags | join: ', ' }}">
+    {% elsif template contains 'collection' %}
+        <meta name="keywords" content="cilt bakım ürünleri, beauty, silikon fırça, yüz temizleme, premium kozmetik, dermatoloji onaylı">
+    {% else %}
+        <meta name="keywords" content="FulBeauty, silikon fırça, yüz temizleme, cilt bakımı, dermatoloji onaylı, hassas cilt, beauty, kozmetik">
+    {% endif %}
+    
+    <!-- CANONICAL URL -->
+    <link rel="canonical" href="{{ canonical_url }}">
+    
+    <!-- HREFLANG FOR INTERNATIONAL SEO -->
+    <link rel="alternate" hreflang="tr" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
+    
+    <!-- OPEN GRAPH TAGS (Social Media SEO) -->
+    <meta property="og:site_name" content="{{ shop.name }}">
+    <meta property="og:type" content="{% if template contains 'product' %}product{% elsif template contains 'article' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="{% if template contains 'product' %}{{ product.title }}{% elsif template contains 'article' %}{{ article.title }}{% else %}{{ page_title }}{% endif %}">
+    {% if template contains 'product' and product.featured_image %}
+        <meta property="og:image" content="{{ product.featured_image | img_url: '1200x630' }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+    {% elsif template contains 'article' and article.image %}
+        <meta property="og:image" content="{{ article.image | img_url: '1200x630' }}">
+    {% else %}
+        <meta property="og:image" content="{{ 'og-default.jpg' | asset_url }}">
+    {% endif %}
+    <meta property="og:url" content="{{ canonical_url }}">
+    {% if page_description %}
+        <meta property="og:description" content="{{ page_description | strip_html | truncatewords: 25 }}">
+    {% endif %}
+    
+    <!-- TWITTER CARDS -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@fulbeauty">
+    <meta name="twitter:title" content="{% if template contains 'product' %}{{ product.title }}{% else %}{{ page_title }}{% endif %}">
+    {% if template contains 'product' and product.featured_image %}
+        <meta name="twitter:image" content="{{ product.featured_image | img_url: '1200x600' }}">
+    {% endif %}
+    
+    <!-- ROBOTS META -->
+    {% if template contains '404' or template contains 'search' %}
+        <meta name="robots" content="noindex, nofollow">
+    {% elsif template contains 'cart' or template contains 'account' %}
+        <meta name="robots" content="noindex, follow">
+    {% else %}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    {% endif %}
+    
+    <!-- FAVICON AND TOUCH ICONS -->
+    {%- if settings.favicon != blank -%}
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | img_url: '32x32' }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon | img_url: '16x16' }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}">
+    {%- endif -%}
+    
+    <!-- PRECONNECT FOR PERFORMANCE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.shopify.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    
+    <!-- STRUCTURED DATA / SCHEMA MARKUP -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ shop.name }}",
+        "url": "{{ shop.url }}",
+        "logo": "{% if settings.logo %}{{ settings.logo | img_url: '300x300' }}{% endif %}",
+        "description": "Dermatoloji uzmanı onaylı premium cilt bakım ürünleri. Güvenli, etkili ve CE sertifikalı ürünler.",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "{{ settings.contact_phone | default: '+90-546-833-66-56' }}",
+            "contactType": "Customer Service",
+            "availableLanguage": "Turkish"
+        },
+        "sameAs": [
+            {% if settings.social_instagram_link != blank %}"{{ settings.social_instagram_link }}"{% endif %}
+            {% if settings.social_facebook_link != blank %},"{{ settings.social_facebook_link }}"{% endif %}
+            {% if settings.social_tiktok_link != blank %},"{{ settings.social_tiktok_link }}"{% endif %}
+        ]
+    }
+    </script>
+    
+    {% if template contains 'product' %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "{{ product.title }}",
+        "description": "{{ product.description | strip_html | truncatewords: 50 }}",
+        "image": [
+            {% for image in product.images limit: 5 %}
+                "{{ image | img_url: '800x800' }}"{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ],
+        "sku": "{{ product.selected_or_first_available_variant.sku }}",
+        "brand": {
+            "@type": "Brand",
+            "name": "{{ shop.name }}"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": "{{ shop.url }}{{ product.url }}",
+            "priceCurrency": "TRY",
+            "price": "{{ product.selected_or_first_available_variant.price | divided_by: 100.0 }}",
+            "priceValidUntil": "{{ 'now' | date: '%s' | plus: 2592000 | date: '%Y-%m-%d' }}",
+            "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+            "seller": {
+                "@type": "Organization",
+                "name": "{{ shop.name }}"
+            }
+        }
+        {% if product.metafields.reviews.rating %}
+        ,"aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "{{ product.metafields.reviews.rating }}",
+            "reviewCount": "{{ product.metafields.reviews.count | default: 100 }}"
+        }
+        {% endif %}
+    }
+    </script>
+    {% endif %}
+    
+    {% if template contains 'article' %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ article.title }}",
+        "description": "{{ article.excerpt | strip_html | truncatewords: 25 }}",
+        "image": "{{ article.image | img_url: '1200x630' }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ article.author | default: 'FulBeauty Uzmanları' }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ shop.name }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{% if settings.logo %}{{ settings.logo | img_url: '300x300' }}{% endif %}"
+            }
+        },
+        "datePublished": "{{ article.published_at | date: '%Y-%m-%d' }}",
+        "dateModified": "{{ article.updated_at | date: '%Y-%m-%d' }}"
+    }
+    </script>
+    {% endif %}
+    
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    {{ content_for_header }}
+    
+    <!-- STYLES -->
+    {{ 'style.css' | asset_url | stylesheet_tag }}
+    
+    <!-- CSS VARIABLES -->
+    <style>
+        :root {
+            --primary-color: {{ settings.primary_color | default: '#8B6F4D' }};
+            --secondary-color: {{ settings.secondary_color | default: '#D4C4B0' }};
+            --accent-color: {{ settings.accent_color | default: '#A0522D' }};
+            --text-primary: {{ settings.text_primary | default: '#2D2621' }};
+            --text-secondary: {{ settings.text_secondary | default: '#5D534A' }};
+            --background-light: {{ settings.background_light | default: '#FAF8F5' }};
+            --trust-green: {{ settings.trust_green | default: '#6B8E5A' }};
+            --luxury-gold: {{ settings.luxury_gold | default: '#D4AF37' }};
+        }
+    </style>
+</head>
+<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
+    
+    <!-- SKIP TO CONTENT (Accessibility) -->
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+        {{ 'accessibility.skip_to_content' | t }}
+    </a>
+    
+    <!-- TRUST BADGE -->
+    {% if settings.show_trust_badge %}
+        <div class="trust-badge">
+            {{ settings.trust_badge_text | default: '✓ Dermatoloji Uzmanı Onaylı' }}
+        </div>
+    {% endif %}
+    
+    <!-- HEADER -->
+    {% section 'header' %}
+    
+    <!-- MAIN CONTENT -->
+    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+        {{ content_for_layout }}
+    </main>
+    
+    <!-- FOOTER -->
+    {% section 'footer' %}
+    
+    <!-- WHATSAPP FLOAT -->
+    {% if settings.show_whatsapp_float %}
+        {% render 'whatsapp-float' %}
+    {% endif %}
+    
+    <!-- JAVASCRIPT -->
+    <script src="{{ 'script.js' | asset_url }}" defer="defer"></script>
+    
+    <!-- GOOGLE ANALYTICS (if needed) -->
+    {% if settings.google_analytics_id != blank %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.google_analytics_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ settings.google_analytics_id }}');
+    </script>
+    {% endif %}
+    
+</body>
+</html>

@@ -1,0 +1,367 @@
+{% comment %}
+  Gizlilik Politikası - FulBeauty
+  KVKK ve GDPR uyumlu
+{% endcomment %}
+
+<div class="page-template fade-in">
+  <div class="page-header">
+    <div class="container">
+      <h1>{{ page.title | default: 'Gizlilik Politikası' }}</h1>
+      <p>Kişisel verilerinizin güvenliği bizim önceliğimizdir</p>
+    </div>
+  </div>
+  
+  <div class="page-content">
+    <div class="container">
+      
+      <div class="content-section">
+        <div style="display: inline-block; background: var(--trust-green); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2rem;">
+          Son Güncelleme: {{ 'now' | date: '%d %B %Y' }}
+        </div>
+        
+        {% if page.content != blank %}
+          {{ page.content }}
+        {% else %}
+          <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem;">
+            FulBeauty olarak, kişisel verilerinizin gizliliğini ve güvenliğini korumayı taahhüt ediyoruz. Bu gizlilik politikası, topladığımız bilgileri, bunları nasıl kullandığımızı ve haklarınızı açıklamaktadır.
+          </p>
+        {% endif %}
+      </div>
+      
+      <!-- Hızlı Erişim Menüsü -->
+      <div class="highlight-box" style="margin-bottom: 3rem;">
+        <h3>📋 Hızlı Erişim</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+          <a href="#toplanan-bilgiler" style="color: var(--primary-color); font-weight: 600;">📊 Topladığımız Bilgiler</a>
+          <a href="#bilgi-kullanimi" style="color: var(--primary-color); font-weight: 600;">🎯 Bilgi Kullanımı</a>
+          <a href="#bilgi-paylasimi" style="color: var(--primary-color); font-weight: 600;">🤝 Bilgi Paylaşımı</a>
+          <a href="#veri-guvenligi" style="color: var(--primary-color); font-weight: 600;">🔒 Veri Güvenliği</a>
+          <a href="#haklariniz" style="color: var(--primary-color); font-weight: 600;">⚖️ Haklarınız</a>
+          <a href="#cerezler" style="color: var(--primary-color); font-weight: 600;">🍪 Çerezler</a>
+        </div>
+      </div>
+      
+      <!-- Topladığımız Bilgiler -->
+      <div class="content-section" id="toplanan-bilgiler">
+        <h2>📊 Topladığımız Bilgiler</h2>
+        
+        <h3>Kişisel Bilgiler</h3>
+        <p>Hizmetlerimizi kullanırken aşağıdaki kişisel bilgileri toplayabiliriz:</p>
+        <div class="highlight-box">
+          <ul style="list-style: none; padding-left: 0;">
+            <li style="margin-bottom: 0.5rem;">• <strong>İsim ve soyisim</strong></li>
+            <li style="margin-bottom: 0.5rem;">• <strong>E-posta adresi</strong></li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Telefon numarası</strong></li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Teslimat adresi</strong></li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Ödeme bilgileri</strong> (şifrelenmiş olarak)</li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Doğum tarihi</strong> (yaş doğrulama için)</li>
+          </ul>
+        </div>
+        
+        <h3>Teknik Bilgiler</h3>
+        <p>Web sitemizi ziyaret ettiğinizde otomatik olarak toplanan bilgiler:</p>
+        <div class="highlight-box">
+          <ul style="list-style: none; padding-left: 0;">
+            <li style="margin-bottom: 0.5rem;">• <strong>IP adresi</strong></li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Tarayıcı türü ve versiyonu</strong></li>
+            <li style="margin-bottom: 0.5rem;">• <strong>İşletim sistemi</strong></li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Sayfa görüntüleme istatistikleri</strong></li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Çerez bilgileri</strong></li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Cihaz bilgileri</strong></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Bilgi Kullanımı -->
+      <div class="content-section" id="bilgi-kullanimi">
+        <h2>🎯 Bilgileri Nasıl Kullanıyoruz</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>📦 Sipariş İşleme</h3>
+            <p>Siparişlerinizi işlemek, teslimat ayarlamak ve müşteri hizmetleri sunmak için.</p>
+            <p><strong>Hukuki Dayanak:</strong> Sözleşmenin ifası</p>
+          </div>
+          <div class="feature-card">
+            <h3>📧 İletişim</h3>
+            <p>Sipariş durumu, promosyonlar ve önemli güncellemeler hakkında bilgilendirme için.</p>
+            <p><strong>Hukuki Dayanak:</strong> Meşru menfaat / Açık rıza</p>
+          </div>
+          <div class="feature-card">
+            <h3>🔒 Güvenlik</h3>
+            <p>Hesap güvenliğini sağlamak ve dolandırıcılığı önlemek için.</p>
+            <p><strong>Hukuki Dayanak:</strong> Meşru menfaat</p>
+          </div>
+          <div class="feature-card">
+            <h3>📊 İyileştirme</h3>
+            <p>Hizmet kalitemizi artırmak ve kullanıcı deneyimini geliştirmek için.</p>
+            <p><strong>Hukuki Dayanak:</strong> Meşru menfaat</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bilgi Paylaşımı -->
+      <div class="content-section" id="bilgi-paylasimi">
+        <h2>🤝 Bilgi Paylaşımı</h2>
+        <div class="highlight-box">
+          <p><strong style="color: var(--error-color);">❗ Bilgilerinizi asla satmayız!</strong> Kişisel verilerinizi yalnızca aşağıdaki durumlarda güvenilir üçüncü taraflarla paylaşırız:</p>
+        </div>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>🚚 Kargo Firmaları</h3>
+            <p>Sipariş teslimatı için gerekli adres ve iletişim bilgileri</p>
+            <p><strong>Örnek:</strong> Aras Kargo, Yurtiçi Kargo</p>
+          </div>
+          <div class="feature-card">
+            <h3>💳 Ödeme Sağlayıcıları</h3>
+            <p>Güvenli ödeme işlemleri için gerekli finansal bilgiler</p>
+            <p><strong>Örnek:</strong> İyzico, PayTR (PCI DSS sertifikalı)</p>
+          </div>
+          <div class="feature-card">
+            <h3>⚖️ Yasal Yükümlülükler</h3>
+            <p>Mahkeme kararı veya yasal zorunluluk durumunda yetkili makamlarla</p>
+            <p><strong>Örnek:</strong> Vergi Dairesi, Mahkeme</p>
+          </div>
+          <div class="feature-card">
+            <h3>📈 Analitik Hizmetler</h3>
+            <p>Anonim kullanım istatistikleri için</p>
+            <p><strong>Örnek:</strong> Google Analytics (anonimleştirilmiş)</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Veri Güvenliği -->
+      <div class="content-section" id="veri-guvenligi">
+        <h2>🔒 Veri Güvenliği</h2>
+        <p>Verilerinizin güvenliği için aşağıdaki önlemleri alıyoruz:</p>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>🛡️ SSL Şifreleme</h3>
+            <p>Tüm veri aktarımları 256-bit SSL şifreleme ile güvence altındadır.</p>
+            <p><strong>Sertifika:</strong> Extended Validation (EV)</p>
+          </div>
+          <div class="feature-card">
+            <h3>🔐 Güvenli Depolama</h3>
+            <p>Verileriniz ISO 27001 sertifikalı sunucularda şifrelenmiş olarak saklanır.</p>
+            <p><strong>Konum:</strong> Türkiye veri merkezleri</p>
+          </div>
+          <div class="feature-card">
+            <h3>👥 Erişim Kontrolü</h3>
+            <p>Verilere sadece yetkili personel, çok faktörlü kimlik doğrulama ile erişebilir.</p>
+            <p><strong>Denetim:</strong> Tüm erişimler loglanır</p>
+          </div>
+          <div class="feature-card">
+            <h3>🔄 Düzenli Yedekleme</h3>
+            <p>Veri kaybını önlemek için günlük otomatik yedekleme yapılır.</p>
+            <p><strong>Saklama:</strong> 3 farklı lokasyonda</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Haklarınız -->
+      <div class="content-section" id="haklariniz">
+        <h2>⚖️ KVKK Kapsamında Haklarınız</h2>
+        <div class="highlight-box">
+          <p><strong>6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında sahip olduğunuz haklar:</strong></p>
+        </div>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>🔍 Bilgi Alma Hakkı</h3>
+            <p>Kişisel verilerinizin işlenip işlenmediğini öğrenme ve işlenen verileriniz hakkında bilgi talep etme hakkı</p>
+          </div>
+          <div class="feature-card">
+            <h3>✏️ Düzeltme Hakkı</h3>
+            <p>Yanlış veya eksik işlenen kişisel verilerinizin düzeltilmesini isteme hakkı</p>
+          </div>
+          <div class="feature-card">
+            <h3>🗑️ Silme Hakkı</h3>
+            <p>Kişisel verilerinizin silinmesini veya yok edilmesini isteme hakkı</p>
+          </div>
+          <div class="feature-card">
+            <h3>🚫 İtiraz Hakkı</h3>
+            <p>Kişisel verilerinizin işlenmesine itiraz etme ve işlemeyi durdurma hakkı</p>
+          </div>
+          <div class="feature-card">
+            <h3>📤 Taşınabilirlik Hakkı</h3>
+            <p>Verilerinizi başka bir veri sorumlusuna aktarılmasını isteme hakkı</p>
+          </div>
+          <div class="feature-card">
+            <h3>💰 Tazminat Hakkı</h3>
+            <p>KVKK'ya aykırı işleme nedeniyle zararlarınızın giderilmesini talep etme hakkı</p>
+          </div>
+        </div>
+        
+        <div class="highlight-box" style="margin-top: 2rem;">
+          <h3>📝 Haklarınızı Nasıl Kullanırsınız?</h3>
+          <p>Bu haklarınızı kullanmak için aşağıdaki yollarla başvurabilirsiniz:</p>
+          <ul>
+            <li><strong>E-posta:</strong> <a href="mailto:kvkk@fulbeauty.com">kvkk@fulbeauty.com</a></li>
+            <li><strong>Posta:</strong> FulBeauty KVKK Birimi, {{ settings.store_address | default: 'İstanbul, Türkiye' }}</li>
+            <li><strong>İletişim Formu:</strong> <a href="{{ pages['contact'].url | default: '/pages/contact' }}">Buradan ulaşın</a></li>
+          </ul>
+          <p><strong>Yanıt Süresi:</strong> Başvurunuz 30 gün içinde yanıtlanacaktır.</p>
+        </div>
+      </div>
+      
+      <!-- Çerezler -->
+      <div class="content-section" id="cerezler">
+        <h2>🍪 Çerezler (Cookies)</h2>
+        <p>Web sitemizde deneyiminizi iyileştirmek için çerezler kullanıyoruz:</p>
+        
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Çerez Türü</th>
+              <th>Amaç</th>
+              <th>Süre</th>
+              <th>Zorunlu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Gerekli Çerezler</strong></td>
+              <td>Site işlevselliği, sepet, oturum yönetimi</td>
+              <td>Oturum süresi</td>
+              <td style="color: var(--error-color);">✅ Evet</td>
+            </tr>
+            <tr>
+              <td><strong>Tercih Çerezleri</strong></td>
+              <td>Dil, para birimi, tema tercihleri</td>
+              <td>1 yıl</td>
+              <td style="color: var(--success-color);">❌ Hayır</td>
+            </tr>
+            <tr>
+              <td><strong>Analitik Çerezler</strong></td>
+              <td>Site kullanım analizi, performans</td>
+              <td>2 yıl</td>
+              <td style="color: var(--success-color);">❌ Hayır</td>
+            </tr>
+            <tr>
+              <td><strong>Pazarlama Çerezleri</strong></td>
+              <td>Kişiselleştirilmiş reklamlar</td>
+              <td>1 yıl</td>
+              <td style="color: var(--success-color);">❌ Hayır</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="highlight-box" style="margin-top: 2rem;">
+          <h3>🔧 Çerez Yönetimi</h3>
+          <p>Çerez tercihlerinizi aşağıdaki yollarla yönetebilirsiniz:</p>
+          <ul>
+            <li><strong>Tarayıcı Ayarları:</strong> Çerezleri tamamen devre dışı bırakabilirsiniz</li>
+            <li><strong>Çerez Tercih Merkezi:</strong> <button onclick="showCookiePreferences()" style="background: var(--primary-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;">Tercihlerimi Yönet</button></li>
+            <li><strong>Çıkış (Opt-out):</strong> Pazarlama çerezlerinden çıkabilirsiniz</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- İletişim -->
+      <div class="content-section">
+        <h2>📞 İletişim ve Şikayetler</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>📧 KVKK Sorumlusu</h3>
+            <p><strong>E-posta:</strong> kvkk@fulbeauty.com</p>
+            <p><strong>Telefon:</strong> {{ settings.contact_phone | default: '+90 (212) 555-0123' }}</p>
+            <p><strong>Yanıt Süresi:</strong> 5 iş günü</p>
+          </div>
+          <div class="feature-card">
+            <h3>🏛️ Kişisel Verileri Koruma Kurulu</h3>
+            <p>Haklarınızın ihlal edildiğinü düşünüyorsanız KVKK'ya başvurabilirsiniz.</p>
+            <p><strong>Web:</strong> <a href="https://kvkk.gov.tr" target="_blank">kvkk.gov.tr</a></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Güncellemeler -->
+      <div class="content-section">
+        <h2>🔄 Politika Güncellemeleri</h2>
+        <div class="highlight-box">
+          <p>Bu gizlilik politikası, yasal değişiklikler veya hizmet güncellemeleri nedeniyle zaman zaman güncellenebilir.</p>
+          
+          <p><strong>Güncellemeler hakkında nasıl bilgilendirileceksiniz:</strong></p>
+          <ul>
+            <li>📧 E-posta ile bildirim</li>
+            <li>🌐 Web sitesinde duyuru</li>
+            <li>📱 Mobil uygulama bildirimi</li>
+          </ul>
+          
+          <p><strong>Son Güncelleme:</strong> {{ 'now' | date: '%d %B %Y' }}</p>
+          <p><strong>Geçerlilik:</strong> Bu politika {{ 'now' | date: '%d %B %Y' }} tarihinden itibaren geçerlidir.</p>
+        </div>
+      </div>
+      
+      <!-- CTA Bölümü -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="{{ pages['contact'].url | default: '/pages/contact' }}" class="cta-button">
+          KVKK Başvurusu Yap
+        </a>
+        <a href="{{ pages['faq'].url | default: '/pages/faq' }}" class="cta-button secondary" style="margin-left: 1rem;">
+          Sık Sorulan Sorular
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Smooth scrolling for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+  
+  // Cookie preferences modal (basit versiyon)
+  window.showCookiePreferences = function() {
+    alert('Çerez tercih merkezi yakında aktif olacak. Şu an için tarayıcı ayarlarınızdan çerezleri yönetebilirsiniz.');
+  };
+  
+  // Privacy policy interactions tracking
+  const sections = document.querySelectorAll('.content-section[id]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'privacy_policy_section_view', {
+            'event_category': 'privacy',
+            'event_label': entry.target.id,
+            'value': 1
+          });
+        }
+      }
+    });
+  }, {
+    threshold: 0.5
+  });
+  
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+  
+  // KVKK application button tracking
+  const kvkkButton = document.querySelector('a[href*="contact"]');
+  if (kvkkButton && kvkkButton.textContent.includes('KVKK')) {
+    kvkkButton.addEventListener('click', function() {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'kvkk_application_click', {
+          'event_category': 'privacy',
+          'event_label': 'kvkk_application',
+          'value': 1
+        });
+      }
+    });
+  }
+});
+</script>

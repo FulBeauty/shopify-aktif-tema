@@ -1,0 +1,238 @@
+{% comment %}
+  İletişim Sayfası - FulBeauty
+  GitHub teması entegrasyonu
+{% endcomment %}
+
+<div class="page-template fade-in">
+  <div class="page-header">
+    <div class="container">
+      <h1>{{ page.title | default: 'İletişim' }}</h1>
+      <p>Size nasıl yardımcı olabiliriz?</p>
+    </div>
+  </div>
+  
+  <div class="page-content">
+    <div class="container">
+      
+      {% if page.content != blank %}
+        <div class="content-section">
+          {{ page.content }}
+        </div>
+      {% else %}
+        <div class="content-section">
+          <h2>Bizimle İletişime Geçin</h2>
+          <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 3rem;">
+            FulBeauty ekibi olarak, sizden gelen her geri bildirimi değerli buluyoruz. Sorularınız, önerileriniz veya herhangi bir konuda yardıma ihtiyacınız varsa, bizimle iletişime geçmekten çekinmeyin.
+          </p>
+        </div>
+      {% endif %}
+      
+      <!-- İletişim Bilgileri -->
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>📧 E-posta</h3>
+          {% if settings.contact_email != blank %}
+            <p><strong>Genel Sorular:</strong><br>{{ settings.contact_email }}</p>
+          {% else %}
+            <p><strong>Genel Sorular:</strong><br>info@fulbeauty.com</p>
+          {% endif %}
+          <p><strong>Sipariş Desteği:</strong><br>orders@fulbeauty.com</p>
+          <p><strong>İade & Değişim:</strong><br>returns@fulbeauty.com</p>
+        </div>
+        
+        <div class="feature-card">
+          <h3>📱 Telefon</h3>
+          {% if settings.contact_phone != blank %}
+            <p><strong>Müşteri Hizmetleri:</strong><br>{{ settings.contact_phone }}</p>
+          {% else %}
+            <p><strong>Müşteri Hizmetleri:</strong><br>+90 (212) 555-0123</p>
+          {% endif %}
+          <p><strong>Çalışma Saatleri:</strong><br>Pazartesi - Cuma: 09:00 - 18:00<br>Cumartesi: 10:00 - 16:00</p>
+        </div>
+        
+        <div class="feature-card">
+          <h3>💬 Sosyal Medya</h3>
+          {% if settings.social_instagram_link != blank %}
+            <p><strong>Instagram:</strong> <a href="{{ settings.social_instagram_link }}" target="_blank">@fulbeauty_official</a></p>
+          {% else %}
+            <p><strong>Instagram:</strong> @fulbeauty_official</p>
+          {% endif %}
+          <p><strong>TikTok:</strong> @fulbeauty</p>
+          <p><strong>Facebook:</strong> FulBeauty Türkiye</p>
+          <p><em>DM'lerinizi 24 saat içinde yanıtlıyoruz!</em></p>
+        </div>
+      </div>
+      
+      <!-- İletişim Formu -->
+      <div class="content-section">
+        <h2>İletişim Formu</h2>
+        
+        {% form 'contact' %}
+          {% if form.posted_successfully? %}
+            <div class="form-success" style="background: var(--success-color); color: white; padding: 1rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
+              <strong>✅ Teşekkürler!</strong> Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.
+            </div>
+          {% endif %}
+          
+          {% if form.errors %}
+            <div class="form-errors" style="background: var(--error-color); color: white; padding: 1rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
+              <strong>❌ Hata:</strong>
+              <ul style="margin: 0.5rem 0 0 1rem;">
+                {% for field in form.errors %}
+                  <li>{{ field[1] }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          
+          <div class="contact-form">
+            <div class="form-group">
+              <label for="ContactFormName">Adınız Soyadınız *</label>
+              <input type="text" 
+                     id="ContactFormName" 
+                     name="contact[name]" 
+                     value="{% if form.name %}{{ form.name }}{% endif %}"
+                     required>
+            </div>
+            
+            <div class="form-group">
+              <label for="ContactFormEmail">E-posta Adresiniz *</label>
+              <input type="email" 
+                     id="ContactFormEmail" 
+                     name="contact[email]" 
+                     value="{% if form.email %}{{ form.email }}{% endif %}"
+                     required>
+            </div>
+            
+            <div class="form-group">
+              <label for="ContactFormPhone">Telefon Numaranız</label>
+              <input type="tel" 
+                     id="ContactFormPhone" 
+                     name="contact[phone]"
+                     value="{% if form.phone %}{{ form.phone }}{% endif %}">
+            </div>
+            
+            <div class="form-group">
+              <label for="ContactFormSubject">Konu *</label>
+              <select id="ContactFormSubject" name="contact[subject]" required>
+                <option value="">Lütfen seçiniz</option>
+                <option value="product_question" {% if form.subject == 'product_question' %}selected{% endif %}>Ürün Hakkında Soru</option>
+                <option value="order_status" {% if form.subject == 'order_status' %}selected{% endif %}>Sipariş Durumu</option>
+                <option value="return_exchange" {% if form.subject == 'return_exchange' %}selected{% endif %}>İade & Değişim</option>
+                <option value="technical_support" {% if form.subject == 'technical_support' %}selected{% endif %}>Teknik Destek</option>
+                <option value="partnership" {% if form.subject == 'partnership' %}selected{% endif %}>İş Birliği</option>
+                <option value="other" {% if form.subject == 'other' %}selected{% endif %}>Diğer</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="ContactFormMessage">Mesajınız *</label>
+              <textarea id="ContactFormMessage" 
+                        name="contact[body]" 
+                        rows="6" 
+                        required 
+                        placeholder="Mesajınızı buraya yazın...">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            </div>
+            
+            <!-- Honeypot for spam protection -->
+            <div style="display: none;">
+              <label for="ContactFormHoney">Bunu boş bırakın</label>
+              <input type="text" id="ContactFormHoney" name="contact[honey]" value="">
+            </div>
+            
+            <button type="submit" class="cta-button">
+              Mesajı Gönder
+            </button>
+          </div>
+        {% endform %}
+      </div>
+      
+      <!-- Hızlı İletişim -->
+      <div class="highlight-box">
+        <p><strong>Hızlı yanıt mı istiyorsunuz?</strong> En sık sorulan soruların yanıtlarını <a href="{{ pages['faq'].url | default: '/pages/faq' }}" style="color: var(--primary-color); font-weight: 600;">FAQ sayfamızda</a> bulabilirsiniz!</p>
+        
+        {% if settings.whatsapp_number != blank %}
+          <p style="margin-top: 1rem;">
+            <strong>Anında destek için:</strong> 
+            <a href="https://wa.me/{{ settings.whatsapp_number }}?text=Merhaba, FulBeauty hakkında bilgi almak istiyorum." 
+               target="_blank"
+               style="display: inline-flex; align-items: center; gap: 0.5rem; background: #25D366; color: white; padding: 0.5rem 1rem; border-radius: 25px; text-decoration: none; font-weight: 600; margin-left: 0.5rem;">
+              💬 WhatsApp'tan Yazın
+            </a>
+          </p>
+        {% endif %}
+      </div>
+      
+      <!-- Harita veya Adres (isteğe bağlı) -->
+      {% if settings.store_address != blank %}
+      <div class="content-section">
+        <h2>Mağaza Adresimiz</h2>
+        <div class="feature-card" style="max-width: 500px; margin: 0 auto;">
+          <h3>📍 Ziyaret Edin</h3>
+          <p>{{ settings.store_address }}</p>
+          {% if settings.store_hours != blank %}
+            <p><strong>Çalışma Saatleri:</strong><br>{{ settings.store_hours }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Form validasyonu
+  const form = document.querySelector('form[action*="contact"]');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      const name = form.querySelector('#ContactFormName').value.trim();
+      const email = form.querySelector('#ContactFormEmail').value.trim();
+      const subject = form.querySelector('#ContactFormSubject').value;
+      const message = form.querySelector('#ContactFormMessage').value.trim();
+      const honey = form.querySelector('#ContactFormHoney').value;
+      
+      // Spam koruması
+      if (honey !== '') {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Temel validasyon
+      if (!name || !email || !subject || !message) {
+        alert('Lütfen tüm zorunlu alanları doldurun.');
+        e.preventDefault();
+        return false;
+      }
+      
+      // E-posta formatı kontrolü
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Lütfen geçerli bir e-posta adresi girin.');
+        e.preventDefault();
+        return false;
+      }
+    });
+    
+    // Karakter sayacı (mesaj alanı için)
+    const messageField = form.querySelector('#ContactFormMessage');
+    if (messageField) {
+      const maxLength = 1000;
+      const counter = document.createElement('div');
+      counter.style.cssText = 'font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: right;';
+      messageField.parentNode.appendChild(counter);
+      
+      function updateCounter() {
+        const remaining = maxLength - messageField.value.length;
+        counter.textContent = `${messageField.value.length}/${maxLength} karakter`;
+        counter.style.color = remaining < 50 ? 'var(--warning-color)' : 'var(--text-secondary)';
+      }
+      
+      messageField.addEventListener('input', updateCounter);
+      messageField.maxLength = maxLength;
+      updateCounter();
+    }
+  }
+});
+</script>
